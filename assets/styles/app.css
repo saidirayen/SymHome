@@ -1,3 +1,29 @@
-body {
-    background-color: skyblue;
+
+:root {
+    --primary: #2C3E50;
+    --accent: #E67E22;
 }
+
+.navbar { background-color: var(--primary) !important; }
+.navbar-brand { color: var(--accent) !important; font-weight: 600; font-size: 1.4rem; }
+.nav-link { color: #ECF0F1 !important; }
+.nav-link:hover { color: var(--accent) !important; }
+.btn-accent { background-color: var(--accent); color: white; border: none; }
+.btn-accent:hover { background-color: #d35400; color: white; }
+
+.hero { background: var(--primary); }
+.hero-title { color: var(--accent); }
+
+.card-img-placeholder {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-img-top { height: 180px; object-fit: cover; }
+.show-img-placeholder { height: 300px; }
+
+.text-accent { color: var(--accent); }
+.btn-primary-custom { background: var(--accent); color: white; }
+.btn-primary-custom:hover { background: #d35400; color: white; }

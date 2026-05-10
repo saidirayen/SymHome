@@ -40,4 +40,23 @@ class MeubleRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function search(string $search = '', ?int $categorieId = null): array
+    {
+        $qb = $this->createQueryBuilder('m')
+            ->leftJoin('m.categorie', 'c')
+            ->addSelect('c');
+
+        if ($search) {
+            $qb->andWhere('m.nom LIKE :search')
+            ->setParameter('search', '%' . $search . '%');
+        }
+
+        if ($categorieId) {
+            $qb->andWhere('c.id = :cat')
+            ->setParameter('cat', $categorieId);
+        }
+
+        return $qb->orderBy('m.id', 'DESC')->getQuery()->getResult();
+    }
 }

@@ -1,20 +1,57 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}SymHome{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/xampp/htdocs/symhome/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/xampp/htdocs/symhome/templates/home/index.html.twig</code></li>
-    </ul>
+<div class="p-5 mb-4 rounded-3 text-white hero">
+    <div class="container-fluid py-3">
+        <h1 class="display-5 fw-bold hero-title">Bienvenue chez SymHome</h1>
+        <p class="col-md-8 fs-5">Découvrez notre collection de meubles et décorations pour chaque pièce de votre maison.</p>
+        <a href="{{ path('app_meuble') }}" class="btn btn-lg btn-primary-custom">Voir nos meubles</a>
+    </div>
 </div>
+
+<h2 class="mb-3">Nos catégories</h2>
+<div class="row g-3 mb-5">
+    {% for categorie in categories %}
+    <div class="col-6 col-md-3">
+        <a href="{{ path('app_meuble', {categorie: categorie.id}) }}" class="text-decoration-none">
+            <div class="card text-center h-100 py-3">
+                <div class="card-body">
+                    <i class="bi bi-grid fs-1 text-accent"></i>
+                    <h5 class="card-title mt-2">{{ categorie.libelle }}</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% else %}
+    <p class="text-muted">Aucune catégorie disponible.</p>
+    {% endfor %}
+</div>
+
+<h2 class="mb-3">Nouveautés</h2>
+<div class="row g-3">
+    {% for meuble in meubles %}
+    <div class="col-6 col-md-3">
+        <div class="card h-100">
+            {% if meuble.image %}
+                <img src="{{ asset('uploads/meubles/' ~ meuble.image) }}" class="card-img-top" alt="{{ meuble.nom }}">
+            {% else %}
+                <div class="card-img-placeholder bg-secondary text-white">
+                    <i class="bi bi-image fs-1"></i>
+                </div>
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+                <h6 class="card-title">{{ meuble.nom }}</h6>
+                <p class="text-muted small">{{ meuble.categorie ? meuble.categorie.libelle : '' }}</p>
+                <p class="fw-bold mt-auto text-accent">{{ meuble.prix }} DT</p>
+                <a href="{{ path('app_meuble_show', {id: meuble.id}) }}" class="btn btn-sm btn-outline-secondary mt-1">Voir détail</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p class="text-muted">Aucun meuble disponible.</p>
+    {% endfor %}
+</div>
+
 {% endblock %}
