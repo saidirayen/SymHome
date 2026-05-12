@@ -15,11 +15,9 @@
 
 {% if items|length == 0 %}
     <div class="text-center py-5">
-        <i class="bi bi-cart-x" style="font-size: 4rem; color: var(--accent);"></i>
+        <i class="bi bi-cart-x panier-empty-icon"></i>
         <h4 class="mt-3 text-muted">Votre panier est vide</h4>
-        <a href="{{ path('app_meuble') }}" class="btn btn-primary-custom mt-3">
-            Voir nos meubles
-        </a>
+        <a href="{{ path('app_meuble') }}" class="btn btn-primary-custom mt-3">Voir nos meubles</a>
     </div>
 {% else %}
 
@@ -29,18 +27,13 @@
         <div class="card mb-3">
             <div class="row g-0 align-items-center">
                 <div class="col-3">
-                    <img src="{{ item.meuble.image }}"
-                         class="img-fluid rounded-start"
-                         style="height: 120px; object-fit: cover; width: 100%;"
-                         alt="{{ item.meuble.nom }}">
+                    <img src="{{ item.meuble.image }}" class="panier-img rounded-start" alt="{{ item.meuble.nom }}">
                 </div>
                 <div class="col-9">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <h6 class="mb-1">{{ item.meuble.nom }}</h6>
-                            <p class="text-muted small mb-1">
-                                {{ item.meuble.categorie ? item.meuble.categorie.libelle : '' }}
-                            </p>
+                            <p class="text-muted small mb-1">{{ item.meuble.categorie ? item.meuble.categorie.libelle : '' }}</p>
                             <p class="text-accent fw-bold mb-0">{{ item.meuble.prix }} DT / unité</p>
                         </div>
                         <div class="d-flex align-items-center gap-3">
@@ -48,14 +41,13 @@
                                   class="d-flex align-items-center gap-2">
                                 <input type="number" name="quantite" value="{{ item.quantite }}"
                                        min="1" max="{{ item.meuble.stock }}"
-                                       class="form-control form-control-sm" style="width: 65px;">
+                                       class="form-control form-control-sm quantite-input">
                                 <button type="submit" class="btn btn-sm btn-outline-secondary">
                                     <i class="bi bi-arrow-clockwise"></i>
                                 </button>
                             </form>
                             <span class="fw-bold">{{ item.sousTotal }} DT</span>
-                            <a href="{{ path('app_panier_remove', {id: item.meuble.id}) }}"
-                               class="btn btn-sm btn-outline-danger">
+                            <a href="{{ path('app_panier_remove', {id: item.meuble.id}) }}" class="btn btn-sm btn-outline-danger">
                                 <i class="bi bi-trash"></i>
                             </a>
                         </div>
@@ -81,9 +73,7 @@
             <a href="" class="btn btn-primary-custom w-100 btn-lg">
                 <i class="bi bi-credit-card"></i> Passer la commande
             </a>
-            <a href="{{ path('app_meuble') }}" class="btn btn-outline-secondary w-100 mt-2">
-                ← Continuer mes achats
-            </a>
+            <a href="{{ path('app_meuble') }}" class="btn btn-outline-secondary w-100 mt-2">← Continuer mes achats</a>
         </div>
     </div>
 </div>

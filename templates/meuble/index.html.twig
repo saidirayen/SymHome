@@ -39,7 +39,8 @@
                 <p class="fw-bold text-accent">{{ meuble.prix }} DT</p>
                 <div class="mt-auto d-flex gap-2">
                     <a href="{{ path('app_meuble_show', {id: meuble.id}) }}" class="btn btn-sm btn-outline-secondary flex-fill">Voir détail</a>
-                    <a href="{{ path('app_panier_add', {id: meuble.id}) }}" class="btn btn-sm btn-primary-custom flex-fill">                        <i class="bi bi-cart-plus"></i>
+                    <a href="{{ path('app_panier_add', {id: meuble.id}) }}" class="btn btn-sm btn-primary-custom flex-fill">
+                        <i class="bi bi-cart-plus"></i>
                     </a>
                 </div>
             </div>
