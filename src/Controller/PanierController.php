@@ -13,6 +13,11 @@ class PanierController extends AbstractController
     #[Route('/panier', name: 'app_panier')]
     public function index(Request $request, MeubleRepository $meubleRepo): Response
     {
+        if (!$this->getUser()) {
+            $this->addFlash('error', 'Connectez-vous pour accéder au panier.');
+            return $this->redirectToRoute('app_login');
+        }
+
         $panier = $request->getSession()->get('panier', []);
         $items = [];
         $total = 0;
@@ -39,6 +44,11 @@ class PanierController extends AbstractController
     #[Route('/panier/add/{id}', name: 'app_panier_add')]
     public function add(int $id, Request $request, MeubleRepository $meubleRepo): Response
     {
+        if (!$this->getUser()) {
+            $this->addFlash('error', 'Connectez-vous pour ajouter au panier.');
+            return $this->redirectToRoute('app_login');
+        }
+
         $meuble = $meubleRepo->find($id);
         if (!$meuble) {
             throw $this->createNotFoundException('Meuble introuvable.');
