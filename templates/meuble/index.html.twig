@@ -1,54 +1,58 @@
 {% extends 'base.html.twig' %}
-{% block title %}Nos Meubles — SymHome{% endblock %}
+{% block title %}{{ meuble.nom }} — SymHome{% endblock %}
 
 {% block body %}
 
-<h2 class="mb-4">Nos Meubles</h2>
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('app_home') }}" class="text-accent">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{{ path('app_meuble') }}" class="text-accent">Meubles</a></li>
+        <li class="breadcrumb-item active">{{ meuble.nom }}</li>
+    </ol>
+</nav>
 
-<form method="GET" action="{{ path('app_meuble') }}" class="row g-2 mb-4">
-    <div class="col-md-6">
-        <input type="text" name="search" class="form-control" placeholder="Rechercher un meuble..." value="{{ search }}">
-    </div>
-    <div class="col-md-4">
-        <select name="categorie" class="form-select">
-            <option value="">Toutes les catégories</option>
-            {% for cat in categories %}
-                <option value="{{ cat.id }}" {{ categorieId == cat.id ? 'selected' : '' }}>{{ cat.libelle }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="col-md-2">
-        <button type="submit" class="btn btn-primary-custom w-100">Filtrer</button>
-    </div>
-</form>
-
-<div class="row g-3">
-    {% for meuble in meubles %}
-    <div class="col-6 col-md-3">
-        <div class="card h-100">
-            {% if meuble.image %}
-                <img src="{{ meuble.image }}" class="card-img-top" alt="{{ meuble.nom }}">
-            {% else %}
-                <div class="card-img-placeholder bg-secondary text-white">
-                    <i class="bi bi-image fs-1"></i>
-                </div>
-            {% endif %}
-            <div class="card-body d-flex flex-column">
-                <h6 class="card-title">{{ meuble.nom }}</h6>
-                <p class="text-muted small mb-1">{{ meuble.categorie ? meuble.categorie.libelle : 'Sans catégorie' }}</p>
-                <p class="fw-bold text-accent">{{ meuble.prix }} DT</p>
-                <div class="mt-auto d-flex gap-2">
-                    <a href="{{ path('app_meuble_show', {id: meuble.id}) }}" class="btn btn-sm btn-outline-secondary flex-fill">Voir détail</a>
-                    <a href="{{ path('app_panier_add', {id: meuble.id}) }}" class="btn btn-sm btn-primary-custom flex-fill">
-                        <i class="bi bi-cart-plus"></i>
-                    </a>
-                </div>
+<div class="row g-5 align-items-start">
+    <div class="col-md-5">
+        {% if meuble.image %}
+            <img src="{{ meuble.image }}" class="show-img shadow-sm" alt="{{ meuble.nom }}">
+        {% else %}
+            <div class="card-img-placeholder show-img-placeholder bg-light">
+                <i class="bi bi-image fs-1 text-muted"></i>
             </div>
+        {% endif %}
+    </div>
+
+    <div class="col-md-7">
+        <span class="badge badge-accent mb-2 px-3 py-2">
+            {{ meuble.categorie ? meuble.categorie.libelle : 'Sans catégorie' }}
+        </span>
+        <h2 class="fw-bold mb-1">{{ meuble.nom }}</h2>
+        <h3 class="text-accent mb-3">{{ meuble.prix }} DT</h3>
+        <p class="text-muted mb-4" style="line-height: 1.7;">{{ meuble.description }}</p>
+
+        <div class="mb-4">
+            {% if meuble.stock > 0 %}
+                <span class="badge bg-success px-3 py-2">
+                    <i class="bi bi-check-circle me-1"></i> En stock — {{ meuble.stock }} disponibles
+                </span>
+            {% else %}
+                <span class="badge bg-danger px-3 py-2">
+                    <i class="bi bi-x-circle me-1"></i> Rupture de stock
+                </span>
+            {% endif %}
+        </div>
+
+        <hr>
+
+        <div class="d-flex gap-3 mt-4">
+            {% if meuble.stock > 0 %}
+                <a href="{{ path('app_panier_add', {id: meuble.id}) }}" class="btn btn-primary-custom btn-lg px-4">
+                    <i class="bi bi-cart-plus me-1"></i> Ajouter au panier
+                </a>
+            {% endif %}
+            <a href="{{ path('app_meuble') }}" class="btn btn-outline-secondary btn-lg">Retour</a>
         </div>
     </div>
-    {% else %}
-    <div class="col-12"><p class="text-muted">Aucun meuble trouvé.</p></div>
-    {% endfor %}
 </div>
 
 {% endblock %}
