@@ -38,8 +38,8 @@ class CommandeController extends AbstractController
             $meuble = $meubleRepo->find($id);
             if (!$meuble) continue;
             $sousTotal = $meuble->getPrix() * $quantite;
-            $total    += $sousTotal;
-            $items[]   = ['meuble' => $meuble, 'quantite' => $quantite, 'sousTotal' => $sousTotal];
+            $total += $sousTotal;
+            $items[] = ['meuble' => $meuble, 'quantite' => $quantite, 'sousTotal' => $sousTotal];
         }
 
         $form = $this->createForm(PaiementType::class);
