@@ -133,3 +133,7 @@ body { font-family: var(--font); background-color: var(--bg); color: #2C3E50; }
     .auth-right { padding: 1.5rem; }
     .auth-form-box { box-shadow: none; padding: 1.5rem; }
 }
+
+/* Paiement */
+.paiement-form .invalid-feedback { display: block; }
+.paiement-form .form-errors { color: #dc3545; font-size: 0.875rem; margin-top: 0.25rem; }
