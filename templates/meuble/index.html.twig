@@ -5,15 +5,15 @@
 
 <h2 class="section-title">Nos Meubles</h2>
 
-<div class="card p-3 mb-4">
-    <form method="GET" action="{{ path('app_meuble') }}" class="row g-2 align-items-end">
+<div class="filter-card">
+    <form method="GET" action="{{ path('app_meuble') }}" class="row g-3 align-items-end">
         <div class="col-md-6">
-            <label class="form-label small text-muted mb-1">Rechercher</label>
+            <label class="form-label">Rechercher</label>
             <input type="text" name="search" class="form-control"
                    placeholder="Nom du meuble..." value="{{ search }}">
         </div>
         <div class="col-md-4">
-            <label class="form-label small text-muted mb-1">Catégorie</label>
+            <label class="form-label">Catégorie</label>
             <select name="categorie" class="form-select">
                 <option value="">Toutes les catégories</option>
                 {% for cat in categories %}
@@ -24,7 +24,9 @@
             </select>
         </div>
         <div class="col-md-2">
-            <button type="submit" class="btn btn-primary-custom w-100">Filtrer</button>
+            <button type="submit" class="btn btn-primary-custom w-100" style="border-radius:50px;">
+                <i class="bi bi-search me-1"></i> Filtrer
+            </button>
         </div>
     </form>
 </div>
@@ -37,11 +39,10 @@
                 {% if meuble.image %}
                     <img src="{{ meuble.image }}" class="card-img-top" alt="{{ meuble.nom }}">
                 {% else %}
-                    <div class="card-img-placeholder bg-light">
-                        <i class="bi bi-image fs-1 text-muted"></i>
+                    <div class="card-img-placeholder">
+                        <i class="bi bi-image"></i>
                     </div>
                 {% endif %}
-                {# Badge stock #}
                 {% if meuble.stock == 0 %}
                     <span class="stock-badge stock-badge--out">Hors stock</span>
                 {% elseif meuble.stock <= 3 %}
@@ -51,19 +52,18 @@
             <div class="card-body d-flex flex-column">
                 <p class="text-muted small mb-1">{{ meuble.categorie ? meuble.categorie.libelle : 'Sans catégorie' }}</p>
                 <h6 class="card-title">{{ meuble.nom }}</h6>
-                <p class="fw-bold text-accent mb-2">{{ meuble.prix }} DT</p>
-                <div class="mt-auto d-flex gap-2">
+                <p class="fw-bold text-accent mb-3 mt-auto">{{ meuble.prix }} DT</p>
+                <div class="d-flex gap-2">
                     <a href="{{ path('app_meuble_show', {id: meuble.id}) }}"
                        class="btn btn-sm btn-outline-secondary flex-fill">Détail</a>
-
                     {% if meuble.stock > 0 %}
                         <a href="{{ path('app_panier_add', {id: meuble.id}) }}"
                            class="btn btn-sm btn-primary-custom flex-fill">
-                            <i class="bi bi-cart-plus"></i>
+                            <i class="bi bi-bag-plus"></i>
                         </a>
                     {% else %}
-                        <button class="btn btn-sm btn-secondary flex-fill" disabled title="Hors stock">
-                            <i class="bi bi-cart-x"></i>
+                        <button class="btn btn-sm btn-outline-secondary flex-fill" disabled>
+                            <i class="bi bi-bag-x"></i>
                         </button>
                     {% endif %}
                 </div>
@@ -73,8 +73,8 @@
     {% else %}
     <div class="col-12">
         <div class="text-center py-5">
-            <i class="bi bi-search fs-1 text-muted"></i>
-            <p class="text-muted mt-2">Aucun meuble trouvé.</p>
+            <i class="bi bi-search fs-1" style="color:#D9D9D9;"></i>
+            <p class="mt-3" style="color:#8A7968;">Aucun meuble trouvé.</p>
         </div>
     </div>
     {% endfor %}

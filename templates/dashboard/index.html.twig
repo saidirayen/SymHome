@@ -44,7 +44,6 @@
 </div>
 
 <div class="row g-4 mb-4">
-    {# Graphique CA par mois #}
     <div class="col-lg-8">
         <div class="admin-card">
             <div class="admin-card-header">Chiffre d'affaires (12 derniers mois)</div>
@@ -53,8 +52,6 @@
             </div>
         </div>
     </div>
-
-    {# Statuts commandes #}
     <div class="col-lg-4">
         <div class="admin-card">
             <div class="admin-card-header">Statuts des commandes</div>
@@ -65,12 +62,11 @@
     </div>
 </div>
 
-{# Top meubles vendus #}
 <div class="admin-card">
     <div class="admin-card-header">Top meubles vendus</div>
     <div class="admin-card-body p-0">
         <table class="table table-hover mb-0">
-            <thead class="table-light">
+            <thead>
                 <tr>
                     <th>#</th>
                     <th>Meuble</th>
@@ -80,12 +76,16 @@
             <tbody>
                 {% for i, item in topMeubles %}
                     <tr>
-                        <td><span class="badge bg-accent-soft text-accent">{{ i + 1 }}</span></td>
-                        <td>{{ item.nom }}</td>
-                        <td><strong>{{ item.totalVendu }}</strong></td>
+                        <td>
+                            <span class="badge" style="background:rgba(212,169,55,.15);color:#B87333;font-weight:700;border-radius:50px;padding:4px 10px;">
+                                {{ i + 1 }}
+                            </span>
+                        </td>
+                        <td class="fw-semibold">{{ item.nom }}</td>
+                        <td><strong style="color:#964B1A;">{{ item.totalVendu }}</strong></td>
                     </tr>
                 {% else %}
-                    <tr><td colspan="3" class="text-center text-muted py-3">Aucune vente pour l'instant.</td></tr>
+                    <tr><td colspan="3" class="text-center py-4" style="color:#8A7968;">Aucune vente pour l'instant.</td></tr>
                 {% endfor %}
             </tbody>
         </table>
@@ -96,8 +96,8 @@
 {% block javascripts %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-// CA par mois
-const caData = {{ caParMois|json_encode|raw }};
+// ── CA par mois ──────────────────────────────────────────────
+const caData   = {{ caParMois|json_encode|raw }};
 const caLabels = caData.map(d => d.mois);
 const caValues = caData.map(d => parseFloat(d.total));
 
@@ -108,16 +108,24 @@ new Chart(document.getElementById('caChart'), {
         datasets: [{
             label: 'CA (TND)',
             data: caValues.length ? caValues : [0],
-            backgroundColor: 'rgba(230, 126, 34, 0.7)',
-            borderColor: '#E67E22',
+            backgroundColor: 'rgba(212,169,55,0.65)',
+            borderColor: '#B87333',
             borderWidth: 1,
-            borderRadius: 6,
+            borderRadius: 8,
+            borderSkipped: false,
         }]
     },
-    options: { responsive: true, plugins: { legend: { display: false } } }
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { family: 'Jost', size: 11 }, color: '#8A7968' } },
+            y: { grid: { color: 'rgba(217,209,192,.4)' }, ticks: { font: { family: 'Jost', size: 11 }, color: '#8A7968' } }
+        }
+    }
 });
 
-// Statuts
+// ── Statuts ──────────────────────────────────────────────────
 const statutData = {{ statutStats|json_encode|raw }};
 new Chart(document.getElementById('statutChart'), {
     type: 'doughnut',
@@ -130,10 +138,21 @@ new Chart(document.getElementById('statutChart'), {
                 statutData.completee,
                 statutData.annulee
             ],
-            backgroundColor: ['#ffc107', '#0d6efd', '#198754', '#dc3545'],
+            backgroundColor: ['#D4A937', '#3B82F6', '#22C55E', '#EF4444'],
+            borderWidth: 0,
+            hoverOffset: 6,
         }]
     },
-    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+    options: {
+        responsive: true,
+        cutout: '65%',
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { font: { family: 'Jost', size: 11 }, color: '#3D2B1A', padding: 14, usePointStyle: true }
+            }
+        }
+    }
 });
 </script>
 {% endblock %}
