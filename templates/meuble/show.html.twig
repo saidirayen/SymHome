@@ -6,40 +6,57 @@
 <div class="row g-5 align-items-start">
     <div class="col-md-5">
         {% if meuble.image %}
-            <img src="{{ meuble.image }}" class="img-fluid rounded shadow-sm show-img" alt="{{ meuble.nom }}">
+            <img src="{{ meuble.image }}" class="img-fluid show-img" alt="{{ meuble.nom }}">
         {% else %}
-            <div class="card-img-placeholder show-img-placeholder bg-secondary text-white rounded">
-                <i class="bi bi-image fs-1"></i>
+            <div class="show-img-placeholder">
+                <i class="bi bi-image fs-1" style="color:#D9D9D9;"></i>
             </div>
         {% endif %}
     </div>
 
     <div class="col-md-7">
-        <span class="badge badge-accent mb-2">
+        <span class="badge badge-accent mb-3">
             {{ meuble.categorie ? meuble.categorie.libelle : 'Sans catégorie' }}
         </span>
-        <h2 class="mb-1">{{ meuble.nom }}</h2>
-        <h3 class="text-accent mb-3">{{ meuble.prix }} DT</h3>
-        <p class="text-muted mb-3">{{ meuble.description }}</p>
+
+        <h2 class="mb-2" style="font-size:2.2rem;">{{ meuble.nom }}</h2>
+
+        <p class="show-price mb-3">{{ meuble.prix }} DT</p>
+
+        {% if meuble.description %}
+            <p class="mb-4" style="color:#8A7968; line-height:1.75; font-size:0.95rem;">{{ meuble.description }}</p>
+        {% endif %}
+
+        <hr style="border-color:#E8E1D5; margin:1.5rem 0;">
+
         <div class="mb-4">
             {% if meuble.stock > 0 %}
-                <span class="badge bg-success fs-6">
-                    <i class="bi bi-check-circle"></i> En stock — {{ meuble.stock }} disponibles
+                <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill"
+                      style="background:#D1FAE5; color:#065F46; font-size:0.85rem; font-weight:600;">
+                    <i class="bi bi-check-circle-fill"></i>
+                    En stock — {{ meuble.stock }} disponibles
                 </span>
             {% else %}
-                <span class="badge bg-danger fs-6">
-                    <i class="bi bi-x-circle"></i> Rupture de stock
+                <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill"
+                      style="background:#FEE2E2; color:#991B1B; font-size:0.85rem; font-weight:600;">
+                    <i class="bi bi-x-circle-fill"></i>
+                    Rupture de stock
                 </span>
             {% endif %}
         </div>
-        <hr>
-        <div class="d-flex gap-3 mt-4">
+
+        <div class="d-flex gap-3 flex-wrap">
             {% if meuble.stock > 0 %}
-                <a href="{{ path('app_panier_add', {id: meuble.id}) }}" class="btn btn-primary-custom btn-lg px-4">
-                    <i class="bi bi-cart-plus"></i> Ajouter au panier
+                <a href="{{ path('app_panier_add', {id: meuble.id}) }}"
+                   class="btn btn-primary-custom btn-lg px-4"
+                   style="border-radius:50px;">
+                    <i class="bi bi-bag-plus me-2"></i>Ajouter au panier
                 </a>
             {% endif %}
-            <a href="{{ path('app_meuble') }}" class="btn btn-outline-secondary btn-lg">← Retour</a>
+            <a href="{{ path('app_meuble') }}" class="btn btn-outline-secondary btn-lg"
+               style="border-radius:50px;">
+                <i class="bi bi-arrow-left me-1"></i> Retour
+            </a>
         </div>
     </div>
 </div>
