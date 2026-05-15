@@ -19,21 +19,29 @@ class PanierController extends AbstractController
         }
 
         $panier = $request->getSession()->get('panier', []);
-        $items = [];
-        $total = 0;
+        $items  = [];
+        $total  = 0;
 
         foreach ($panier as $id => $quantite) {
             $meuble = $meubleRepo->find($id);
             if ($meuble) {
-                $sousTotal = $meuble->getPrix() * $quantite;
-                $total += $sousTotal;
-                $items[] = [
-                    'meuble' => $meuble,
-                    'quantite' => $quantite,
+                // Corriger silencieusement si la quantité dépasse le stock actuel
+                $quantite = min($quantite, $meuble->getStock());
+                if ($quantite <= 0) {
+                    unset($panier[$id]);
+                    continue;
+                }
+                $panier[$id] = $quantite;
+                $sousTotal   = $meuble->getPrix() * $quantite;
+                $total      += $sousTotal;
+                $items[]     = [
+                    'meuble'    => $meuble,
+                    'quantite'  => $quantite,
                     'sousTotal' => $sousTotal,
                 ];
             }
         }
+        $request->getSession()->set('panier', $panier);
 
         return $this->render('panier/index.html.twig', [
             'items' => $items,
@@ -54,8 +62,21 @@ class PanierController extends AbstractController
             throw $this->createNotFoundException('Meuble introuvable.');
         }
 
-        $panier = $request->getSession()->get('panier', []);
-        $panier[$id] = ($panier[$id] ?? 0) + 1;
+        // ── Vérification stock ───────────────────────────────────────
+        if ($meuble->getStock() <= 0) {
+            $this->addFlash('error', '"' . $meuble->getNom() . '" est hors stock.');
+            return $this->redirectToRoute('app_meuble');
+        }
+
+        $panier        = $request->getSession()->get('panier', []);
+        $dejaEnPanier  = $panier[$id] ?? 0;
+
+        if ($dejaEnPanier >= $meuble->getStock()) {
+            $this->addFlash('error', 'Stock insuffisant pour "' . $meuble->getNom() . '" (max : ' . $meuble->getStock() . ').');
+            return $this->redirectToRoute('app_panier');
+        }
+
+        $panier[$id] = $dejaEnPanier + 1;
         $request->getSession()->set('panier', $panier);
 
         $this->addFlash('success', '"' . $meuble->getNom() . '" ajouté au panier.');
@@ -63,14 +84,20 @@ class PanierController extends AbstractController
     }
 
     #[Route('/panier/update/{id}', name: 'app_panier_update', methods: ['POST'])]
-    public function update(int $id, Request $request): Response
+    public function update(int $id, Request $request, MeubleRepository $meubleRepo): Response
     {
         $quantite = (int) $request->request->get('quantite', 1);
-        $panier = $request->getSession()->get('panier', []);
+        $panier   = $request->getSession()->get('panier', []);
 
         if ($quantite <= 0) {
             unset($panier[$id]);
         } else {
+            // ── Vérification stock ───────────────────────────────────
+            $meuble = $meubleRepo->find($id);
+            if ($meuble && $quantite > $meuble->getStock()) {
+                $quantite = $meuble->getStock();
+                $this->addFlash('error', 'Quantité ajustée au stock disponible (' . $quantite . ').');
+            }
             $panier[$id] = $quantite;
         }
 

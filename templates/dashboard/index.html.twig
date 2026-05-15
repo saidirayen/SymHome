@@ -1,20 +1,139 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}Hello AdminDashboardController!{% endblock %}
+{% block title %}Dashboard — Admin SymHome{% endblock %}
+{% block page_title %}Tableau de bord{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/xampp/htdocs/symhome/src/Controller/AdminDashboardController.php</code></li>
-        <li>Your template at <code>C:/xampp/htdocs/symhome/templates/admin_dashboard/index.html.twig</code></li>
-    </ul>
+<div class="row g-4 mb-4">
+    <div class="col-sm-6 col-xl-3">
+        <div class="admin-stat-card">
+            <div class="admin-stat-icon bg-accent-soft"><i class="bi bi-cash-stack"></i></div>
+            <div>
+                <div class="admin-stat-label">Chiffre d'affaires</div>
+                <div class="admin-stat-value">{{ chiffreAffaires|number_format(2, ',', ' ') }} TND</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="admin-stat-card">
+            <div class="admin-stat-icon bg-blue-soft"><i class="bi bi-receipt"></i></div>
+            <div>
+                <div class="admin-stat-label">Commandes</div>
+                <div class="admin-stat-value">{{ nbCommandes }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="admin-stat-card">
+            <div class="admin-stat-icon bg-green-soft"><i class="bi bi-people"></i></div>
+            <div>
+                <div class="admin-stat-label">Clients</div>
+                <div class="admin-stat-value">{{ nbClients }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="admin-stat-card">
+            <div class="admin-stat-icon bg-purple-soft"><i class="bi bi-box-seam"></i></div>
+            <div>
+                <div class="admin-stat-label">Meubles</div>
+                <div class="admin-stat-value">{{ nbMeubles }}</div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="row g-4 mb-4">
+    {# Graphique CA par mois #}
+    <div class="col-lg-8">
+        <div class="admin-card">
+            <div class="admin-card-header">Chiffre d'affaires (12 derniers mois)</div>
+            <div class="admin-card-body">
+                <canvas id="caChart" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+
+    {# Statuts commandes #}
+    <div class="col-lg-4">
+        <div class="admin-card">
+            <div class="admin-card-header">Statuts des commandes</div>
+            <div class="admin-card-body">
+                <canvas id="statutChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Top meubles vendus #}
+<div class="admin-card">
+    <div class="admin-card-header">Top meubles vendus</div>
+    <div class="admin-card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Meuble</th>
+                    <th>Quantité vendue</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i, item in topMeubles %}
+                    <tr>
+                        <td><span class="badge bg-accent-soft text-accent">{{ i + 1 }}</span></td>
+                        <td>{{ item.nom }}</td>
+                        <td><strong>{{ item.totalVendu }}</strong></td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="3" class="text-center text-muted py-3">Aucune vente pour l'instant.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// CA par mois
+const caData = {{ caParMois|json_encode|raw }};
+const caLabels = caData.map(d => d.mois);
+const caValues = caData.map(d => parseFloat(d.total));
+
+new Chart(document.getElementById('caChart'), {
+    type: 'bar',
+    data: {
+        labels: caLabels.length ? caLabels : ['Aucune donnée'],
+        datasets: [{
+            label: 'CA (TND)',
+            data: caValues.length ? caValues : [0],
+            backgroundColor: 'rgba(230, 126, 34, 0.7)',
+            borderColor: '#E67E22',
+            borderWidth: 1,
+            borderRadius: 6,
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false } } }
+});
+
+// Statuts
+const statutData = {{ statutStats|json_encode|raw }};
+new Chart(document.getElementById('statutChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['En attente', 'En cours', 'Complétées', 'Annulées'],
+        datasets: [{
+            data: [
+                statutData.en_attente,
+                statutData.en_cours,
+                statutData.completee,
+                statutData.annulee
+            ],
+            backgroundColor: ['#ffc107', '#0d6efd', '#198754', '#dc3545'],
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+</script>
 {% endblock %}

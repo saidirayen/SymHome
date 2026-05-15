@@ -1,0 +1,74 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}Meubles — Admin{% endblock %}
+{% block page_title %}Gestion des Meubles{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <span class="text-muted">{{ meubles|length }} meuble(s)</span>
+    <a href="{{ path('admin_meuble_new') }}" class="btn btn-accent">
+        <i class="bi bi-plus-lg me-1"></i> Ajouter un meuble
+    </a>
+</div>
+
+<div class="admin-card">
+    <div class="admin-card-body p-0">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Image</th>
+                    <th>Nom</th>
+                    <th>Slug</th>
+                    <th>Catégorie</th>
+                    <th>Prix</th>
+                    <th>Stock</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for meuble in meubles %}
+                    <tr>
+                        <td>
+                            {% if meuble.image %}
+                                <img src="{{ meuble.image }}" alt="{{ meuble.nom }}" class="admin-thumb">
+                            {% else %}
+                                <div class="admin-thumb-placeholder"><i class="bi bi-image"></i></div>
+                            {% endif %}
+                        </td>
+                        <td class="fw-semibold">{{ meuble.nom }}</td>
+                        <td><code>{{ meuble.slug }}</code></td>
+                        <td>
+                            {% if meuble.categorie %}
+                                <span class="badge bg-secondary">{{ meuble.categorie.libelle }}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ meuble.prix|number_format(2, ',', ' ') }} TND</td>
+                        <td>
+                            <span class="badge {{ meuble.stock > 5 ? 'bg-success' : (meuble.stock > 0 ? 'bg-warning text-dark' : 'bg-danger') }}">
+                                {{ meuble.stock }}
+                            </span>
+                        </td>
+                        <td class="text-end">
+                            <a href="{{ path('admin_meuble_show', {'id': meuble.id}) }}"
+                               class="btn btn-sm btn-outline-secondary me-1">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                            <a href="{{ path('admin_meuble_edit', {'id': meuble.id}) }}"
+                               class="btn btn-sm btn-outline-primary me-1">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <form method="post" action="{{ path('admin_meuble_delete', {'id': meuble.id}) }}"
+                                  class="d-inline" onsubmit="return confirm('Supprimer ce meuble ?')">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ meuble.id) }}">
+                                <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="7" class="text-center text-muted py-4">Aucun meuble enregistré.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
