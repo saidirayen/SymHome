@@ -1,0 +1,40 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}{{ user.prenom }} {{ user.nom }} — Admin{% endblock %}
+{% block page_title %}{{ user.prenom }} {{ user.nom }}{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="admin-card">
+            <div class="admin-card-body">
+                <dl class="row">
+                    <dt class="col-4">ID</dt>       <dd class="col-8">{{ user.id }}</dd>
+                    <dt class="col-4">Prénom</dt>   <dd class="col-8">{{ user.prenom }}</dd>
+                    <dt class="col-4">Nom</dt>      <dd class="col-8">{{ user.nom }}</dd>
+                    <dt class="col-4">Email</dt>    <dd class="col-8">{{ user.email }}</dd>
+                    <dt class="col-4">Téléphone</dt><dd class="col-8">{{ user.telephone ?? '—' }}</dd>
+                    <dt class="col-4">Rôle</dt>
+                    <dd class="col-8">
+                        {% if 'ROLE_ADMIN' in user.roles %}
+                            <span class="badge bg-danger">Administrateur</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Client</span>
+                        {% endif %}
+                    </dd>
+                </dl>
+                <div class="d-flex gap-2 mt-3">
+                    <a href="{{ path('admin_user_index') }}" class="btn btn-outline-secondary">Retour</a>
+                    {% if app.user.id != user.id %}
+                    <form method="post" action="{{ path('admin_user_delete', {'id': user.id}) }}"
+                          onsubmit="return confirm('Supprimer cet utilisateur ?')">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                        <button class="btn btn-outline-danger"><i class="bi bi-trash me-1"></i> Supprimer</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

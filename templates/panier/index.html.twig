@@ -38,15 +38,14 @@
                         </div>
                         <div class="d-flex align-items-center gap-3">
                             <form method="post" action="{{ path('app_panier_update', {id: item.meuble.id}) }}"
-                                  class="d-flex align-items-center gap-2">
+                                  class="d-flex align-items-center gap-2 panier-update-form">
                                 <input type="number" name="quantite" value="{{ item.quantite }}"
                                        min="1" max="{{ item.meuble.stock }}"
-                                       class="form-control form-control-sm quantite-input">
-                                <button type="submit" class="btn btn-sm btn-outline-secondary">
-                                    <i class="bi bi-arrow-clockwise"></i>
-                                </button>
+                                       class="form-control form-control-sm quantite-input"
+                                       data-prix="{{ item.meuble.prix }}"
+                                       data-max="{{ item.meuble.stock }}">
                             </form>
-                            <span class="fw-bold">{{ item.sousTotal }} DT</span>
+                            <span class="fw-bold sous-total-display">{{ item.sousTotal }} DT</span>
                             <a href="{{ path('app_panier_remove', {id: item.meuble.id}) }}"
                                class="btn btn-sm btn-outline-danger">
                                 <i class="bi bi-trash"></i>
@@ -86,5 +85,51 @@
 </div>
 
 {% endif %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const totalDisplay = document.querySelector('.text-accent.fs-5');
+
+    function updateTotals() {
+        let grandTotal = 0;
+
+        document.querySelectorAll('.quantite-input').forEach(function (input) {
+            const prix = parseFloat(input.dataset.prix);
+            const max  = parseInt(input.dataset.max);
+            let qty    = parseInt(input.value) || 1;
+
+            if (qty < 1)   qty = 1;
+            if (qty > max) qty = max;
+            input.value = qty;
+
+            const sousTotal = prix * qty;
+            grandTotal     += sousTotal;
+
+            const card = input.closest('.card');
+            if (card) {
+                const sousTotalEl = card.querySelector('.sous-total-display');
+                if (sousTotalEl) sousTotalEl.textContent = sousTotal.toFixed(0) + ' DT';
+            }
+        });
+
+        if (totalDisplay) {
+            totalDisplay.textContent = grandTotal.toFixed(0) + ' DT';
+        }
+    }
+
+    document.querySelectorAll('.quantite-input').forEach(function (input) {
+        input.addEventListener('input', updateTotals);
+        input.addEventListener('change', function () {
+            clearTimeout(input._debounce);
+            input._debounce = setTimeout(function () {
+                input.closest('.panier-update-form').submit();
+            }, 800);
+        });
+    });
+});
+</script>
+{% endblock %}
 
 {% endblock %}

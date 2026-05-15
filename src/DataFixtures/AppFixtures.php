@@ -95,14 +95,25 @@ class AppFixtures extends Fixture
             }
         }
 
+        // ── Client normal ──────────────────────────────────────────────
         $user = new User();
         $user->setNom('Saidi');
         $user->setPrenom('Mohamed Rayen');
         $user->setEmail('rayensaidi@gmail.com');
-        $user->setTelephone('12345678');
+        $user->setTelephone('27256925');
         $user->setRoles(['ROLE_USER']);
         $user->setPassword($this->hasher->hashPassword($user, 'rayen1234'));
         $manager->persist($user);
+
+        // ── Administrateur ─────────────────────────────────────────────
+        $admin = new User();
+        $admin->setNom('Ksouri');
+        $admin->setPrenom('Radhouen');
+        $admin->setEmail('radhouen@gmail.com');
+        $admin->setTelephone('94626761');
+        $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setPassword($this->hasher->hashPassword($admin, 'admin'));
+        $manager->persist($admin);
 
         $manager->flush();
     }
