@@ -52,6 +52,9 @@ class AdminCommandeController extends AbstractController
     public function delete(Request $request, Commande $commande, EntityManagerInterface $em): Response
     {
         if ($this->isCsrfTokenValid('delete'.$commande->getId(), $request->getPayload()->getString('_token'))) {
+            foreach ($commande->getLigneCommandes() as $ligne) {
+                $em->remove($ligne);
+            }
             $em->remove($commande);
             $em->flush();
             $this->addFlash('success', 'Commande supprimée.');
