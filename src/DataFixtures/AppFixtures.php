@@ -32,41 +32,41 @@ class AppFixtures extends Fixture
             'Séjour' => [
                 'description' => 'Canapés, tables basses et meubles TV pour votre salon.',
                 'meubles' => [
-                    ['Canapé 3 places', 'Canapé confortable en tissu gris anthracite, idéal pour 3 personnes.', 599.00, 10, 'https://images.unsplash.com/photo-1549187774-b4e9b0445b41?w=1200'],
-                    ['Table basse en bois', 'Table basse en chêne massif avec plateau en verre trempé.', 189.00, 15, 'https://images.unsplash.com/photo-1532372320978-9b0a9f4f4f87?w=1200'],
-                    ['Meuble TV 150cm', 'Meuble TV avec 2 portes coulissantes et rangement intégré.', 249.00, 8, 'https://images.unsplash.com/photo-1582582621959-48d27397dc69?w=1200'],
-                    ["Canapé d'angle", "Grand canapé d'angle en cuir noir, très confortable et moderne.", 899.00, 5, 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200'],
-                    ['Étagère murale salon', 'Étagère murale en bois flotté, 3 niveaux, style scandinave.', 79.00, 20, 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=1200'],
+                    ['Canapé 3 places', 'Canapé confortable en tissu gris anthracite, idéal pour 3 personnes.', 599.00, 10, 'canape-3-places.jpg'],
+                    ['Table basse en bois', 'Table basse en chêne massif avec plateau en verre trempé.', 189.00, 15, 'table-basse.jpg'],
+                    ['Meuble TV 150cm', 'Meuble TV avec 2 portes coulissantes et rangement intégré.', 249.00, 8, 'meuble-tv.jpg'],
+                    ["Canapé d'angle", "Grand canapé d'angle en cuir noir, très confortable et moderne.", 899.00, 5, 'canape-angle.jpg'],
+                    ['Étagère murale salon', 'Étagère murale en bois flotté, 3 niveaux, style scandinave.', 79.00, 20, 'etagere-murale.jpg'],
                 ],
             ],
             'Chambre' => [
                 'description' => 'Lits, armoires et tables de chevet pour votre chambre.',
                 'meubles' => [
-                    ['Lit 160x200', 'Lit double avec tête de lit rembourrée en velours bleu nuit.', 449.00, 7, 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200'],
-                    ['Armoire 3 portes', 'Grande armoire avec miroir central et rangements multiples.', 599.00, 6, 'https://images.unsplash.com/photo-1556020685-ae41abfc9365?w=1200'],
-                    ['Table de chevet', 'Table de chevet avec tiroir et niche ouverte, en bois naturel.', 89.00, 25, 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1200'],
-                    ['Lit 90x200', 'Lit simple en bois de pin massif, idéal pour chambre enfant.', 229.00, 12, 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=1200'],
-                    ['Commode 5 tiroirs', 'Commode blanche avec 5 tiroirs spacieux et poignées dorées.', 279.00, 9, 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200'],
+                    ['Lit 160x200', 'Lit double avec tête de lit rembourrée en velours bleu nuit.', 449.00, 7, 'lit-160.jpg'],
+                    ['Armoire 3 portes', 'Grande armoire avec miroir central et rangements multiples.', 599.00, 6, 'armoire-3-portes.jpg'],
+                    ['Table de chevet', 'Table de chevet avec tiroir et niche ouverte, en bois naturel.', 89.00, 25, 'table-chevet.jpg'],
+                    ['Lit 90x200', 'Lit simple en bois de pin massif, idéal pour chambre enfant.', 229.00, 12, 'lit-90.jpg'],
+                    ['Commode 5 tiroirs', 'Commode blanche avec 5 tiroirs spacieux et poignées dorées.', 279.00, 9, 'commode.jpg'],
                 ],
             ],
             'Bureau' => [
                 'description' => 'Bureaux, chaises ergonomiques et étagères pour travailler.',
                 'meubles' => [
-                    ['Bureau en L', 'Bureau en L avec retour et rangement latéral, finition chêne.', 349.00, 8, 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200'],
-                    ['Chaise ergonomique', 'Chaise de bureau réglable avec soutien lombaire et accoudoirs.', 199.00, 15, 'https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=1200'],
-                    ['Bibliothèque 5 niveaux', 'Grande bibliothèque en bois avec 5 étagères ajustables.', 159.00, 10, 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1200'],
-                    ['Bureau compact', 'Bureau compact idéal pour petits espaces, tiroir intégré.', 149.00, 18, 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=1200'],
-                    ['Fauteuil de direction', 'Fauteuil de direction en cuir véritable avec accoudoirs réglables.', 329.00, 6, 'https://images.unsplash.com/photo-1579656592043-a20e25a4aa4b?w=1200'],
+                    ['Bureau en L', 'Bureau en L avec retour et rangement latéral, finition chêne.', 349.00, 8, 'bureau-l.jpg'],
+                    ['Chaise ergonomique', 'Chaise de bureau réglable avec soutien lombaire et accoudoirs.', 199.00, 15, 'chaise-ergonomique.jpg'],
+                    ['Bibliothèque 5 niveaux', 'Grande bibliothèque en bois avec 5 étagères ajustables.', 159.00, 10, 'bibliotheque.jpg'],
+                    ['Bureau compact', 'Bureau compact idéal pour petits espaces, tiroir intégré.', 149.00, 18, 'bureau-compact.jpg'],
+                    ['Fauteuil de direction', 'Fauteuil de direction en cuir véritable avec accoudoirs réglables.', 329.00, 6, 'fauteuil-direction.jpg'],
                 ],
             ],
             'Cuisine' => [
                 'description' => 'Tables de repas, chaises et éléments de cuisine.',
                 'meubles' => [
-                    ['Table de repas 6 personnes', 'Table extensible en chêne pour 6 à 8 personnes.', 499.00, 7, 'https://images.unsplash.com/photo-1617806118233-18e1de247200?w=1200'],
-                    ['Chaise de cuisine lot 4', 'Chaise en bois avec assise rembourrée, vendue par lot de 4.', 239.00, 20, 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=1200'],
-                    ['Îlot de cuisine', 'Îlot central avec plan de travail en marbre et rangements.', 799.00, 4, 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1200'],
-                    ['Tabouret de bar lot 2', 'Tabouret de bar réglable en hauteur, vendu par lot de 2.', 149.00, 14, 'https://images.unsplash.com/photo-1517705008128-361805f42e86?w=1200'],
-                    ['Buffet de cuisine', 'Buffet 2 portes avec tiroirs et plan de travail en bois.', 359.00, 9, 'https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200'],
+                    ['Table de repas 6 personnes', 'Table extensible en chêne pour 6 à 8 personnes.', 499.00, 7, 'table-repas.jpg'],
+                    ['Chaise de cuisine lot 4', 'Chaise en bois avec assise rembourrée, vendue par lot de 4.', 239.00, 20, 'chaise-cuisine.jpg'],
+                    ['Îlot de cuisine', 'Îlot central avec plan de travail en marbre et rangements.', 799.00, 4, 'ilot-cuisine.jpg'],
+                    ['Tabouret de bar lot 2', 'Tabouret de bar réglable en hauteur, vendu par lot de 2.', 149.00, 14, 'tabouret-bar.jpg'],
+                    ['Buffet de cuisine', 'Buffet 2 portes avec tiroirs et plan de travail en bois.', 359.00, 9, 'buffet-cuisine.jpg'],
                 ],
             ],
         ];
@@ -95,7 +95,6 @@ class AppFixtures extends Fixture
             }
         }
 
-        // ── Client normal ──────────────────────────────────────────────
         $user = new User();
         $user->setNom('Saidi');
         $user->setPrenom('Mohamed Rayen');
@@ -105,7 +104,6 @@ class AppFixtures extends Fixture
         $user->setPassword($this->hasher->hashPassword($user, 'rayen1234'));
         $manager->persist($user);
 
-        // ── Administrateur ─────────────────────────────────────────────
         $admin = new User();
         $admin->setNom('Ksouri');
         $admin->setPrenom('Radhouen');

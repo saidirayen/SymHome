@@ -20,7 +20,7 @@
                     <div class="col-12">{{ form_row(form.image) }}</div>
                     {% if meuble.image %}
                         <div class="col-12">
-                            <img src="{{ meuble.image }}" alt="Aperçu actuel"
+                            <img src="{{ asset('uploads/meubles/' ~ meuble.image) }}" alt="Aperçu actuel"
                                  style="max-height:180px; border-radius:8px;">
                         </div>
                     {% endif %}

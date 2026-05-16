@@ -42,7 +42,7 @@
         <div class="card h-100 {{ meuble.stock == 0 ? 'card-out-of-stock' : '' }}">
             <div class="position-relative">
                 {% if meuble.image %}
-                    <img src="{{ meuble.image }}" class="card-img-top" alt="{{ meuble.nom }}">
+                    <img src="{{ asset('uploads/meubles/' ~ meuble.image) }}" class="card-img-top" alt="{{ meuble.nom }}">
                 {% else %}
                     <div class="card-img-placeholder bg-light">
                         <i class="bi bi-image fs-1 text-muted"></i>

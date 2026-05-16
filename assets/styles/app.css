@@ -896,9 +896,9 @@ p { margin-bottom: 0; }
     margin-bottom: 0.2rem;
 }
 .admin-stat-value {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
     font-size: 1.75rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--clr-ink);
     line-height: 1;
 }

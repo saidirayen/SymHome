@@ -30,7 +30,7 @@
                     <tr>
                         <td>
                             {% if meuble.image %}
-                                <img src="{{ meuble.image }}" alt="{{ meuble.nom }}" class="admin-thumb">
+                                <img src="{{ asset('uploads/meubles/' ~ meuble.image) }}" alt="{{ meuble.nom }}" class="admin-thumb">
                             {% else %}
                                 <div class="admin-thumb-placeholder"><i class="bi bi-image"></i></div>
                             {% endif %}

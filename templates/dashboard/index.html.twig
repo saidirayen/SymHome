@@ -4,37 +4,50 @@
 {% block page_title %}Tableau de bord{% endblock %}
 
 {% block body %}
-<div class="row g-4 mb-4">
-    <div class="col-sm-6 col-xl-3">
+<div class="row g-3 mb-4">
+    <div class="col-12">
         <div class="admin-stat-card">
-            <div class="admin-stat-icon bg-accent-soft"><i class="bi bi-cash-stack"></i></div>
+            <div class="admin-stat-icon bg-accent-soft">
+                <i class="bi bi-cash-stack"></i>
+            </div>
             <div>
                 <div class="admin-stat-label">Chiffre d'affaires</div>
-                <div class="admin-stat-value">{{ chiffreAffaires|number_format(2, ',', ' ') }} TND</div>
+                <div class="admin-stat-value">
+                    {{ chiffreAffaires|number_format(2, ',', ' ') }} TND
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-sm-6 col-xl-3">
+
+    <div class="col-sm-4">
         <div class="admin-stat-card">
-            <div class="admin-stat-icon bg-blue-soft"><i class="bi bi-receipt"></i></div>
+            <div class="admin-stat-icon bg-blue-soft">
+                <i class="bi bi-receipt"></i>
+            </div>
             <div>
                 <div class="admin-stat-label">Commandes</div>
                 <div class="admin-stat-value">{{ nbCommandes }}</div>
             </div>
         </div>
     </div>
-    <div class="col-sm-6 col-xl-3">
+
+    <div class="col-sm-4">
         <div class="admin-stat-card">
-            <div class="admin-stat-icon bg-green-soft"><i class="bi bi-people"></i></div>
+            <div class="admin-stat-icon bg-green-soft">
+                <i class="bi bi-people"></i>
+            </div>
             <div>
                 <div class="admin-stat-label">Clients</div>
                 <div class="admin-stat-value">{{ nbClients }}</div>
             </div>
         </div>
     </div>
-    <div class="col-sm-6 col-xl-3">
+
+    <div class="col-sm-4">
         <div class="admin-stat-card">
-            <div class="admin-stat-icon bg-purple-soft"><i class="bi bi-box-seam"></i></div>
+            <div class="admin-stat-icon bg-purple-soft">
+                <i class="bi bi-box-seam"></i>
+            </div>
             <div>
                 <div class="admin-stat-label">Meubles</div>
                 <div class="admin-stat-value">{{ nbMeubles }}</div>
@@ -43,27 +56,39 @@
     </div>
 </div>
 
-<div class="row g-4 mb-4">
-    <div class="col-lg-8">
-        <div class="admin-card">
-            <div class="admin-card-header">Chiffre d'affaires (12 derniers mois)</div>
-            <div class="admin-card-body">
-                <canvas id="caChart" height="100"></canvas>
+<div class="row g-4 mb-4 align-items-stretch">
+
+    <div class="col-lg-6 d-flex">
+        <div class="admin-card w-100">
+            <div class="admin-card-header">
+                Chiffre d'affaires (12 derniers mois)
+            </div>
+
+            <div class="admin-card-body d-flex align-items-end" style="height: 420px;">
+                <canvas id="caChart"></canvas>
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
-        <div class="admin-card">
-            <div class="admin-card-header">Statuts des commandes</div>
-            <div class="admin-card-body">
-                <canvas id="statutChart"></canvas>
+
+    <div class="col-lg-6 d-flex">
+        <div class="admin-card w-100">
+            <div class="admin-card-header">
+                Statuts des commandes
+            </div>
+
+            <div class="admin-card-body d-flex justify-content-center align-items-center" style="height: 420px;">
+                <canvas id="statutChart" style="max-height: 320px;"></canvas>
             </div>
         </div>
     </div>
+
 </div>
 
 <div class="admin-card">
-    <div class="admin-card-header">Top meubles vendus</div>
+    <div class="admin-card-header">
+        Top meubles vendus
+    </div>
+
     <div class="admin-card-body p-0">
         <table class="table table-hover mb-0">
             <thead>
@@ -73,19 +98,42 @@
                     <th>Quantité vendue</th>
                 </tr>
             </thead>
+
             <tbody>
                 {% for i, item in topMeubles %}
                     <tr>
                         <td>
-                            <span class="badge" style="background:rgba(212,169,55,.15);color:#B87333;font-weight:700;border-radius:50px;padding:4px 10px;">
+                            <span
+                                class="badge"
+                                style="
+                                    background: rgba(212,169,55,.15);
+                                    color: #B87333;
+                                    font-weight: 700;
+                                    border-radius: 50px;
+                                    padding: 4px 10px;
+                                "
+                            >
                                 {{ i + 1 }}
                             </span>
                         </td>
-                        <td class="fw-semibold">{{ item.nom }}</td>
-                        <td><strong style="color:#964B1A;">{{ item.totalVendu }}</strong></td>
+
+                        <td class="fw-semibold">
+                            {{ item.nom }}
+                        </td>
+
+                        <td>
+                            <strong style="color:#964B1A;">
+                                {{ item.totalVendu }}
+                            </strong>
+                        </td>
                     </tr>
+
                 {% else %}
-                    <tr><td colspan="3" class="text-center py-4" style="color:#8A7968;">Aucune vente pour l'instant.</td></tr>
+                    <tr>
+                        <td colspan="3" class="text-center py-4" style="color:#8A7968;">
+                            Aucune vente pour l'instant.
+                        </td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>
@@ -95,19 +143,23 @@
 
 {% block javascripts %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
-// ── CA par mois ──────────────────────────────────────────────
-const caData   = {{ caParMois|json_encode|raw }};
+const caData = {{ caParMois|json_encode|raw }};
+
 const caLabels = caData.map(d => d.mois);
 const caValues = caData.map(d => parseFloat(d.total));
 
 new Chart(document.getElementById('caChart'), {
     type: 'bar',
+
     data: {
         labels: caLabels.length ? caLabels : ['Aucune donnée'],
+
         datasets: [{
             label: 'CA (TND)',
             data: caValues.length ? caValues : [0],
+
             backgroundColor: 'rgba(212,169,55,0.65)',
             borderColor: '#B87333',
             borderWidth: 1,
@@ -115,22 +167,64 @@ new Chart(document.getElementById('caChart'), {
             borderSkipped: false,
         }]
     },
+
     options: {
         responsive: true,
-        plugins: { legend: { display: false } },
+        maintainAspectRatio: false,
+
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+
         scales: {
-            x: { grid: { display: false }, ticks: { font: { family: 'Jost', size: 11 }, color: '#8A7968' } },
-            y: { grid: { color: 'rgba(217,209,192,.4)' }, ticks: { font: { family: 'Jost', size: 11 }, color: '#8A7968' } }
+            x: {
+                grid: {
+                    display: false
+                },
+
+                ticks: {
+                    font: {
+                        family: 'Jost',
+                        size: 11
+                    },
+
+                    color: '#8A7968'
+                }
+            },
+
+            y: {
+                grid: {
+                    color: 'rgba(217,209,192,.4)'
+                },
+
+                ticks: {
+                    font: {
+                        family: 'Jost',
+                        size: 11
+                    },
+
+                    color: '#8A7968'
+                }
+            }
         }
     }
 });
 
-// ── Statuts ──────────────────────────────────────────────────
 const statutData = {{ statutStats|json_encode|raw }};
+
 new Chart(document.getElementById('statutChart'), {
     type: 'doughnut',
+
     data: {
-        labels: ['En attente', 'En cours', 'Complétées', 'Annulées'],
+        labels: [
+            'En attente',
+            'En cours',
+            'Complétées',
+            'Annulées'
+        ],
+
         datasets: [{
             data: [
                 statutData.en_attente,
@@ -138,18 +232,38 @@ new Chart(document.getElementById('statutChart'), {
                 statutData.completee,
                 statutData.annulee
             ],
-            backgroundColor: ['#D4A937', '#3B82F6', '#22C55E', '#EF4444'],
+
+            backgroundColor: [
+                '#D4A937',
+                '#3B82F6',
+                '#22C55E',
+                '#EF4444'
+            ],
+
             borderWidth: 0,
             hoverOffset: 6,
         }]
     },
+
     options: {
         responsive: true,
+        maintainAspectRatio: false,
         cutout: '65%',
+
         plugins: {
             legend: {
                 position: 'bottom',
-                labels: { font: { family: 'Jost', size: 11 }, color: '#3D2B1A', padding: 14, usePointStyle: true }
+
+                labels: {
+                    font: {
+                        family: 'Jost',
+                        size: 11
+                    },
+
+                    color: '#3D2B1A',
+                    padding: 14,
+                    usePointStyle: true
+                }
             }
         }
     }
