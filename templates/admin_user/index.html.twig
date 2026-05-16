@@ -12,7 +12,6 @@
                     <th>Nom</th>
                     <th>Email</th>
                     <th>Téléphone</th>
-                    <th>Rôle</th>
                     <th class="text-end">Actions</th>
                 </tr>
             </thead>
@@ -23,13 +22,6 @@
                         <td class="fw-semibold">{{ user.prenom }} {{ user.nom }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.telephone ?? '—' }}</td>
-                        <td>
-                            {% if 'ROLE_ADMIN' in user.roles %}
-                                <span class="badge bg-danger">Admin</span>
-                            {% else %}
-                                <span class="badge bg-secondary">Client</span>
-                            {% endif %}
-                        </td>
                         <td class="text-end">
                             <a href="{{ path('admin_user_show', {'id': user.id}) }}"
                                class="btn btn-sm btn-outline-secondary me-1">

@@ -14,14 +14,6 @@
                     <dt class="col-4">Nom</dt>      <dd class="col-8">{{ user.nom }}</dd>
                     <dt class="col-4">Email</dt>    <dd class="col-8">{{ user.email }}</dd>
                     <dt class="col-4">Téléphone</dt><dd class="col-8">{{ user.telephone ?? '—' }}</dd>
-                    <dt class="col-4">Rôle</dt>
-                    <dd class="col-8">
-                        {% if 'ROLE_ADMIN' in user.roles %}
-                            <span class="badge bg-danger">Administrateur</span>
-                        {% else %}
-                            <span class="badge bg-secondary">Client</span>
-                        {% endif %}
-                    </dd>
                 </dl>
                 <div class="d-flex gap-2 mt-3">
                     <a href="{{ path('admin_user_index') }}" class="btn btn-outline-secondary">Retour</a>
