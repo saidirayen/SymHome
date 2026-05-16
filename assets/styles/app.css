@@ -1,69 +1,25 @@
-/* ============================================================
-   SymHome — app.css  v2.0
-   Warm Luxury Minimalism — Palette: Beige / Mustard / Brown
-   ============================================================
-
-   TABLE OF CONTENTS
-   01. Google Fonts Import
-   02. CSS Variables & Reset
-   03. Typography
-   04. Layout Utilities
-   05. Navbar (client)
-   06. Flash Messages / Alerts
-   07. Buttons
-   08. Forms & Inputs
-   09. Cards (product)
-   10. Hero Section
-   11. Section Titles
-   12. Category Cards
-   13. Product Grid — meuble/show
-   14. Panier (cart)
-   15. Commandes (orders)
-   16. Auth Pages (login/register)
-   17. Paiement
-   18. Admin Layout
-   19. Admin Sidebar
-   20. Admin Topbar
-   21. Admin Stat Cards
-   22. Admin Tables
-   23. Admin Forms
-   24. Stock Badges
-   25. Responsive
-   ============================================================ */
-
-
-/* ── 01. Google Fonts ────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&display=swap');
 
-
-/* ── 02. CSS Variables & Reset ───────────────────────────── */
 :root {
-    /* Palette */
     --clr-light-gray:   #D9D9D9;
     --clr-beige:        #E8E1D5;
     --clr-beige-dark:   #D8CFC0;
     --clr-mustard:      #D4A937;
     --clr-mustard-dark: #B87333;
     --clr-brown:        #964B1A;
-    --clr-ink:          #1E0F05;   /* near-black warm */
-    --clr-white:        #FDFAF5;   /* warm white */
-
-    /* Semantic aliases */
+    --clr-ink:          #1E0F05;
+    --clr-white:        #FDFAF5;
     --primary:      var(--clr-ink);
     --accent:       var(--clr-mustard);
     --accent-dark:  var(--clr-mustard-dark);
     --accent-deep:  var(--clr-brown);
-    --bg:           #F5F0E8;       /* page background */
+    --bg:           #F5F0E8;
     --bg-card:      var(--clr-white);
     --border:       var(--clr-light-gray);
     --text-muted:   #8A7968;
     --text-body:    #3D2B1A;
-
-    /* Typography */
     --font-display: 'Cormorant Garamond', Georgia, serif;
     --font-body:    'Jost', 'Helvetica Neue', sans-serif;
-
-    /* Spacing / Shape */
     --radius-sm:  6px;
     --radius:     12px;
     --radius-lg:  20px;
@@ -71,16 +27,12 @@
     --shadow-sm:  0 2px 12px rgba(30,15,5,.08);
     --shadow-md:  0 6px 28px rgba(30,15,5,.12);
     --shadow-lg:  0 12px 48px rgba(30,15,5,.16);
-
-    /* Admin */
     --sidebar-w:  250px;
     --sidebar-bg: #130A02;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
 body {
     font-family: var(--font-body);
     background-color: var(--bg);
@@ -90,27 +42,20 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-
-/* ── 03. Typography ──────────────────────────────────────── */
 h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
     font-weight: 600;
     color: var(--clr-ink);
     line-height: 1.25;
 }
-
 h1 { font-size: clamp(2rem, 4vw, 3.2rem); }
 h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); }
 h3 { font-size: clamp(1.2rem, 2.5vw, 1.7rem); }
 h6 { font-family: var(--font-body); font-weight: 600; }
-
 a { color: var(--accent-dark); text-decoration: none; }
 a:hover { color: var(--accent-deep); }
-
 p { margin-bottom: 0; }
 
-
-/* ── 04. Layout Utilities ────────────────────────────────── */
 .text-accent   { color: var(--accent) !important; }
 .text-accent-d { color: var(--accent-dark) !important; }
 .text-brown    { color: var(--accent-deep) !important; }
@@ -127,7 +72,6 @@ p { margin-bottom: 0; }
     border-radius: 20px;
 }
 
-/* Divider */
 .divider-warm {
     border: none;
     height: 1px;
@@ -135,15 +79,12 @@ p { margin-bottom: 0; }
     margin: 2rem 0;
 }
 
-
-/* ── 05. Navbar (client) ─────────────────────────────────── */
 .navbar {
     background-color: var(--clr-ink) !important;
     padding: 0.75rem 0;
     box-shadow: 0 2px 16px rgba(30,15,5,.25);
     border-bottom: 1px solid rgba(212,169,55,.15);
 }
-
 .navbar-brand {
     color: var(--accent) !important;
     font-family: var(--font-display);
@@ -170,7 +111,6 @@ p { margin-bottom: 0; }
     background: rgba(212,169,55,.08);
 }
 
-/* Cart badge */
 .navbar .badge.rounded-pill {
     background: var(--accent) !important;
     color: var(--clr-ink);
@@ -187,7 +127,6 @@ p { margin-bottom: 0; }
     border-radius: 50px !important;
 }
 
-/* Dropdown */
 .dropdown-menu {
     background: var(--clr-white);
     border: 1px solid var(--border);
@@ -216,7 +155,6 @@ p { margin-bottom: 0; }
 }
 .dropdown-divider { border-color: var(--border); }
 
-/* Navbar auth buttons */
 .navbar .btn-sm.btn-outline-light {
     border-color: rgba(245,240,232,.3);
     color: rgba(245,240,232,.85);
@@ -234,8 +172,6 @@ p { margin-bottom: 0; }
     color: white;
 }
 
-
-/* ── 06. Flash Messages / Alerts ─────────────────────────── */
 .alert {
     border: none;
     border-radius: var(--radius);
@@ -268,8 +204,6 @@ p { margin-bottom: 0; }
 .alert .btn-close { opacity: 0.5; }
 .alert .btn-close:hover { opacity: 1; }
 
-
-/* ── 07. Buttons ─────────────────────────────────────────── */
 .btn {
     font-family: var(--font-body);
     font-weight: 500;
@@ -279,8 +213,6 @@ p { margin-bottom: 0; }
     position: relative;
     overflow: hidden;
 }
-
-/* Primary CTA — golden mustard */
 .btn-primary-custom,
 .btn-accent {
     background: var(--accent);
@@ -300,8 +232,6 @@ p { margin-bottom: 0; }
     transform: translateY(0);
     box-shadow: none;
 }
-
-/* Secondary outline */
 .btn-outline-secondary {
     border-color: var(--clr-light-gray);
     color: var(--text-body);
@@ -312,8 +242,6 @@ p { margin-bottom: 0; }
     border-color: var(--clr-beige-dark);
     color: var(--clr-ink);
 }
-
-/* Danger outline */
 .btn-outline-danger {
     border-color: #E0A0A0;
     color: #C0392B;
@@ -323,13 +251,9 @@ p { margin-bottom: 0; }
     border-color: #C0392B;
     color: #8B1A1A;
 }
-
-/* Sizes */
 .btn-lg { padding: 0.75rem 1.75rem; font-size: 0.95rem; border-radius: var(--radius-sm); }
 .btn-sm { padding: 0.32rem 0.75rem; font-size: 0.8rem; }
 
-
-/* ── 08. Forms & Inputs ──────────────────────────────────── */
 .form-control,
 .form-select {
     font-family: var(--font-body);
@@ -364,7 +288,6 @@ p { margin-bottom: 0; }
 }
 .form-check-input:focus { box-shadow: 0 0 0 3px rgba(212,169,55,.2); }
 
-/* Filter card */
 .filter-card {
     background: var(--clr-white);
     border-radius: var(--radius);
@@ -374,8 +297,6 @@ p { margin-bottom: 0; }
     margin-bottom: 2rem;
 }
 
-
-/* ── 09. Cards (product) ─────────────────────────────────── */
 .card {
     background: var(--bg-card);
     border: 1px solid rgba(217,209,192,.6);
@@ -389,7 +310,6 @@ p { margin-bottom: 0; }
     box-shadow: var(--shadow-md);
     border-color: rgba(212,169,55,.3);
 }
-
 .card-img-top {
     height: 210px;
     object-fit: cover;
@@ -405,9 +325,7 @@ p { margin-bottom: 0; }
     border-radius: 0;
 }
 .card-img-placeholder i { color: var(--clr-light-gray); font-size: 2.5rem; }
-
 .card-body { padding: 1.1rem 1.2rem; }
-
 .card-title {
     font-family: var(--font-body);
     font-size: 0.9rem;
@@ -416,8 +334,6 @@ p { margin-bottom: 0; }
     margin-bottom: 0.25rem;
     line-height: 1.35;
 }
-
-/* Category label above product name */
 .card-body .text-muted.small {
     font-size: 0.73rem;
     letter-spacing: 0.07em;
@@ -425,8 +341,6 @@ p { margin-bottom: 0; }
     color: var(--text-muted) !important;
     font-weight: 500;
 }
-
-/* Price */
 .card-body .fw-bold.text-accent,
 .card-body .fw-bold.mt-auto.text-accent {
     font-family: var(--font-display);
@@ -434,14 +348,10 @@ p { margin-bottom: 0; }
     font-weight: 700;
     color: var(--accent-dark) !important;
 }
-
-/* Out-of-stock card */
 .card-out-of-stock { opacity: 0.65; }
 .card-out-of-stock .card-img-top,
 .card-out-of-stock .card-img-placeholder { filter: grayscale(55%); }
 
-
-/* ── 10. Hero Section ────────────────────────────────────── */
 .hero {
     background: linear-gradient(135deg, #1E0F05 0%, #3D1F08 45%, #5C2E0A 100%);
     border-radius: var(--radius-lg);
@@ -472,7 +382,6 @@ p { margin-bottom: 0; }
     background: radial-gradient(circle, rgba(150,75,26,.2) 0%, transparent 70%);
     pointer-events: none;
 }
-
 .hero-title {
     font-family: var(--font-display);
     color: var(--accent) !important;
@@ -482,14 +391,12 @@ p { margin-bottom: 0; }
     line-height: 1.1;
     margin-bottom: 1.2rem;
 }
-
 .hero p {
     color: rgba(232,225,213,.7);
     font-size: 1.05rem;
     line-height: 1.7;
     margin-bottom: 2rem;
 }
-
 .hero .btn-primary-custom {
     font-size: 0.9rem;
     letter-spacing: 0.08em;
@@ -498,8 +405,6 @@ p { margin-bottom: 0; }
     border-radius: 50px;
 }
 
-
-/* ── 11. Section Titles ──────────────────────────────────── */
 .section-title {
     font-family: var(--font-display);
     font-size: clamp(1.5rem, 3vw, 2rem);
@@ -521,8 +426,6 @@ p { margin-bottom: 0; }
     border-radius: 2px;
 }
 
-
-/* ── 12. Category Cards ──────────────────────────────────── */
 .cat-card {
     border: 1.5px solid transparent;
     background: var(--bg-card);
@@ -533,7 +436,6 @@ p { margin-bottom: 0; }
     transform: translateY(-4px);
     box-shadow: var(--shadow-md);
 }
-
 .cat-icon {
     font-size: 2rem;
     color: var(--accent);
@@ -542,7 +444,6 @@ p { margin-bottom: 0; }
     transition: transform .25s;
 }
 .cat-card:hover .cat-icon { transform: scale(1.15); }
-
 .cat-card h6 {
     font-family: var(--font-body);
     font-size: 0.88rem;
@@ -552,8 +453,6 @@ p { margin-bottom: 0; }
     color: var(--clr-ink);
 }
 
-
-/* ── 13. Product Show Page ───────────────────────────────── */
 .show-img {
     max-height: 480px;
     object-fit: cover;
@@ -569,8 +468,6 @@ p { margin-bottom: 0; }
     align-items: center;
     justify-content: center;
 }
-
-/* Product detail info */
 .product-category-tag {
     display: inline-block;
     font-size: 0.72rem;
@@ -583,8 +480,6 @@ p { margin-bottom: 0; }
     border-radius: 50px;
     margin-bottom: 0.75rem;
 }
-
-/* Override badge used on show page */
 .badge.badge-accent {
     font-size: 0.72rem;
     font-weight: 600;
@@ -597,7 +492,6 @@ p { margin-bottom: 0; }
     margin-bottom: 0.75rem;
     display: inline-block;
 }
-
 .show-price {
     font-family: var(--font-display);
     font-size: 2.2rem;
@@ -606,29 +500,23 @@ p { margin-bottom: 0; }
     letter-spacing: -0.01em;
 }
 
-
-/* ── 14. Panier (cart) ───────────────────────────────────── */
 .panier-img {
     height: 120px;
     object-fit: cover;
     width: 100%;
     border-radius: var(--radius) 0 0 var(--radius);
 }
-
 .panier-empty-icon {
     font-size: 4rem;
     color: var(--clr-beige-dark);
     display: block;
 }
-
 .quantite-input {
     width: 72px;
     text-align: center;
     border-radius: var(--radius-sm) !important;
     font-weight: 600;
 }
-
-/* Cart item card — no hover lift */
 .panier-item-card {
     border-radius: var(--radius);
     box-shadow: var(--shadow-xs);
@@ -636,8 +524,6 @@ p { margin-bottom: 0; }
     transition: box-shadow .2s;
 }
 .panier-item-card:hover { transform: none; box-shadow: var(--shadow-sm); }
-
-/* Recap card */
 .recap-card {
     background: var(--clr-white);
     border-radius: var(--radius);
@@ -665,8 +551,6 @@ p { margin-bottom: 0; }
     border-color: var(--clr-beige-dark);
     margin: 1rem 0;
 }
-
-/* Sous-total display in cart */
 .sous-total-display {
     font-family: var(--font-display);
     font-size: 1.05rem;
@@ -675,8 +559,6 @@ p { margin-bottom: 0; }
     text-align: right;
 }
 
-
-/* ── 15. Commandes (orders) ──────────────────────────────── */
 .commande-card {
     background: var(--bg-card);
     border-radius: var(--radius);
@@ -695,7 +577,6 @@ p { margin-bottom: 0; }
     letter-spacing: 0.03em;
     color: var(--clr-ink);
 }
-
 .statut-badge {
     font-size: 0.75rem;
     font-weight: 600;
@@ -705,7 +586,6 @@ p { margin-bottom: 0; }
     border-radius: 50px;
     display: inline-block;
 }
-
 .commande-total {
     font-family: var(--font-display);
     font-size: 1.2rem;
@@ -713,19 +593,14 @@ p { margin-bottom: 0; }
     color: var(--accent-dark);
 }
 
-
-/* ── 16. Auth Pages (login / register) ───────────────────── */
 .auth-page {
     background-color: var(--bg);
     font-family: var(--font-body);
 }
-
 .auth-wrapper {
     display: flex;
     min-height: 100vh;
 }
-
-/* Left decorative panel */
 .auth-left {
     width: 42%;
     background: linear-gradient(160deg, #1E0F05 0%, #3D1F08 50%, #5C2E0A 100%);
@@ -741,7 +616,8 @@ p { margin-bottom: 0; }
     position: absolute;
     top: -20%;
     right: -20%;
-    width: 500px; height: 500px;
+    width: 500px;
+    height: 500px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(212,169,55,.1) 0%, transparent 70%);
 }
@@ -750,17 +626,16 @@ p { margin-bottom: 0; }
     position: absolute;
     bottom: -10%;
     left: -10%;
-    width: 300px; height: 300px;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(150,75,26,.15) 0%, transparent 70%);
 }
-
 .auth-left-content {
     max-width: 360px;
     position: relative;
     z-index: 1;
 }
-
 .auth-brand {
     font-family: var(--font-display);
     color: var(--accent);
@@ -770,14 +645,12 @@ p { margin-bottom: 0; }
     margin-bottom: 1rem;
     display: block;
 }
-
 .auth-tagline {
     color: rgba(232,225,213,.65);
     font-size: 1rem;
     line-height: 1.7;
     margin-bottom: 2.5rem;
 }
-
 .auth-features {
     list-style: none;
     padding: 0;
@@ -796,8 +669,6 @@ p { margin-bottom: 0; }
     font-size: 1rem;
     flex-shrink: 0;
 }
-
-/* Right form panel */
 .auth-right {
     flex: 1;
     display: flex;
@@ -806,7 +677,6 @@ p { margin-bottom: 0; }
     padding: 3rem;
     background: var(--clr-beige);
 }
-
 .auth-form-box {
     width: 100%;
     max-width: 440px;
@@ -816,7 +686,6 @@ p { margin-bottom: 0; }
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(217,209,192,.5);
 }
-
 .auth-form-title {
     font-family: var(--font-display);
     font-size: 2rem;
@@ -824,14 +693,11 @@ p { margin-bottom: 0; }
     color: var(--clr-ink);
     margin-bottom: 0.35rem;
 }
-
 .auth-form-subtitle {
     color: var(--text-muted);
     font-size: 0.9rem;
     margin-bottom: 2rem;
 }
-
-/* Auth divider */
 .auth-divider {
     text-align: center;
     margin: 1.75rem 0;
@@ -856,35 +722,24 @@ p { margin-bottom: 0; }
     height: 1px;
     background: var(--clr-beige-dark);
 }
-
-/* Auth form inputs override */
 .auth-form-box .form-control {
     background: var(--clr-white);
     padding: 0.7rem 1rem;
 }
-.auth-form-box .form-control-lg {
-    font-size: 0.93rem;
-}
+.auth-form-box .form-control-lg { font-size: 0.93rem; }
 
-
-/* ── 17. Paiement ────────────────────────────────────────── */
 .paiement-form .invalid-feedback { display: block; }
 .paiement-form .form-errors {
     color: #C0392B;
     font-size: 0.83rem;
     margin-top: 0.2rem;
 }
-
-
-/* ── 18. Admin Layout ────────────────────────────────────── */
 .admin-layout {
     display: flex;
     min-height: 100vh;
     background: #F0EBE3;
+    margin-bottom: 30px;
 }
-
-
-/* ── 19. Admin Sidebar ───────────────────────────────────── */
 .admin-sidebar {
     width: var(--sidebar-w);
     min-height: 100vh;
@@ -898,7 +753,6 @@ p { margin-bottom: 0; }
     box-shadow: 4px 0 20px rgba(0,0,0,.25);
     border-right: 1px solid rgba(255,255,255,.04);
 }
-
 .admin-brand {
     display: flex;
     align-items: center;
@@ -912,7 +766,6 @@ p { margin-bottom: 0; }
     border-bottom: 1px solid rgba(255,255,255,.06);
 }
 .admin-brand i { font-size: 1.2rem; color: var(--accent-dark); }
-
 .admin-badge {
     font-family: var(--font-body);
     font-size: 0.58rem;
@@ -925,14 +778,12 @@ p { margin-bottom: 0; }
     padding: 2px 6px;
     margin-left: auto;
 }
-
 .admin-nav {
     padding: 1rem 0;
     flex: 1;
     display: flex;
     flex-direction: column;
 }
-
 .admin-nav-link {
     display: flex;
     align-items: center;
@@ -947,20 +798,17 @@ p { margin-bottom: 0; }
     transition: background .15s, color .15s, border-color .15s;
 }
 .admin-nav-link i { font-size: 1.05rem; width: 18px; text-align: center; }
-
 .admin-nav-link:hover {
     color: rgba(232,225,213,.9);
     background: rgba(255,255,255,.05);
     border-left-color: rgba(212,169,55,.3);
 }
-
 .admin-nav-link.active {
     color: var(--clr-white);
     background: rgba(212,169,55,.12);
     border-left-color: var(--accent);
     font-weight: 600;
 }
-
 .admin-nav-link.text-danger-soft {
     color: rgba(255,150,130,.5);
 }
@@ -969,15 +817,11 @@ p { margin-bottom: 0; }
     background: rgba(220,50,50,.07);
     border-left-color: rgba(220,50,50,.3);
 }
-
 .admin-nav-divider {
     height: 1px;
     background: rgba(255,255,255,.06);
     margin: 0.75rem 1.5rem;
 }
-
-
-/* ── 20. Admin Topbar ────────────────────────────────────── */
 .admin-content {
     margin-left: var(--sidebar-w);
     flex: 1;
@@ -985,7 +829,6 @@ p { margin-bottom: 0; }
     flex-direction: column;
     min-height: 100vh;
 }
-
 .admin-topbar {
     background: var(--clr-white);
     padding: 1rem 2rem;
@@ -998,14 +841,12 @@ p { margin-bottom: 0; }
     top: 0;
     z-index: 50;
 }
-
 .admin-topbar-title {
     font-family: var(--font-display);
     font-size: 1.3rem;
     font-weight: 600;
     color: var(--clr-ink);
 }
-
 .admin-topbar-user {
     display: flex;
     align-items: center;
@@ -1015,14 +856,7 @@ p { margin-bottom: 0; }
     color: var(--text-muted);
 }
 .admin-topbar-user i { color: var(--accent-dark); font-size: 1.1rem; }
-
-.admin-main {
-    padding: 2rem 2.25rem;
-    flex: 1;
-}
-
-
-/* ── 21. Admin Stat Cards ────────────────────────────────── */
+.admin-main { padding: 2rem 2.25rem; flex: 1; }
 .admin-stat-card {
     background: var(--clr-white);
     border-radius: var(--radius);
@@ -1038,7 +872,6 @@ p { margin-bottom: 0; }
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
 }
-
 .admin-stat-icon {
     width: 54px;
     height: 54px;
@@ -1049,12 +882,10 @@ p { margin-bottom: 0; }
     font-size: 1.4rem;
     flex-shrink: 0;
 }
-
 .bg-accent-soft { background: rgba(212,169,55,.15); color: var(--accent-dark); }
 .bg-blue-soft   { background: rgba(59,130,246,.12); color: #2563EB; }
 .bg-green-soft  { background: rgba(34,197,94,.12);  color: #16A34A; }
 .bg-purple-soft { background: rgba(139,92,246,.12); color: #7C3AED; }
-
 .admin-stat-label {
     font-size: 0.75rem;
     font-weight: 600;
@@ -1070,9 +901,6 @@ p { margin-bottom: 0; }
     color: var(--clr-ink);
     line-height: 1;
 }
-
-
-/* ── 22. Admin Tables & Cards ────────────────────────────── */
 .admin-card {
     background: var(--clr-white);
     border-radius: var(--radius);
@@ -1080,7 +908,6 @@ p { margin-bottom: 0; }
     border: 1px solid rgba(217,209,192,.5);
     overflow: hidden;
 }
-
 .admin-card-header {
     padding: 1rem 1.4rem;
     font-family: var(--font-body);
@@ -1092,10 +919,7 @@ p { margin-bottom: 0; }
     border-bottom: 1px solid var(--clr-beige-dark);
     color: var(--accent-deep);
 }
-
 .admin-card-body { padding: 1.4rem; }
-
-/* Table inside admin card */
 .admin-card .table {
     margin-bottom: 0;
     font-size: 0.875rem;
@@ -1118,7 +942,6 @@ p { margin-bottom: 0; }
 }
 .admin-card .table tr:last-child td { border-bottom: none; }
 .admin-card .table tbody tr:hover { background: rgba(232,225,213,.25); }
-
 .admin-thumb {
     width: 52px;
     height: 40px;
@@ -1136,15 +959,10 @@ p { margin-bottom: 0; }
     justify-content: center;
     color: var(--clr-light-gray);
 }
-
-/* Statut badges for admin commande */
 .statut-en_attente { background: #FEF3C7; color: #92400E; border-radius: 50px; }
 .statut-en_cours   { background: #DBEAFE; color: #1E40AF; border-radius: 50px; }
 .statut-completee  { background: #D1FAE5; color: #065F46; border-radius: 50px; }
 .statut-annulee    { background: #FEE2E2; color: #991B1B; border-radius: 50px; }
-
-
-/* ── 23. Admin Forms ─────────────────────────────────────── */
 .admin-form-card {
     background: var(--clr-white);
     border-radius: var(--radius);
@@ -1153,9 +971,6 @@ p { margin-bottom: 0; }
     padding: 2rem;
     max-width: 680px;
 }
-
-
-/* ── 24. Stock Badges ────────────────────────────────────── */
 .stock-badge {
     position: absolute;
     top: 10px;
@@ -1172,16 +987,11 @@ p { margin-bottom: 0; }
 }
 .stock-badge--out { background: #E53935; color: #fff; }
 .stock-badge--low { background: var(--accent-dark); color: #fff; }
-
-
-/* ── 25. Responsive ──────────────────────────────────────── */
 @media (max-width: 991px) {
     .hero { padding: 3rem 2rem; }
     .hero-title { font-size: 2.2rem; }
 }
-
 @media (max-width: 768px) {
-    /* Auth */
     .auth-left { display: none; }
     .auth-right { padding: 1.5rem; background: var(--bg); }
     .auth-form-box {
@@ -1189,8 +999,6 @@ p { margin-bottom: 0; }
         padding: 2rem 1.5rem;
         border-radius: var(--radius);
     }
-
-    /* Admin */
     .admin-sidebar {
         width: 100%;
         min-height: auto;
@@ -1202,18 +1010,11 @@ p { margin-bottom: 0; }
     .admin-layout  { flex-direction: column; }
     .admin-main    { padding: 1.25rem; }
     .admin-topbar  { padding: 0.75rem 1.25rem; }
-
-    /* Panier */
     .recap-card { position: static; }
-
-    /* Hero */
     .hero { padding: 2.5rem 1.5rem; border-radius: var(--radius); }
-
-    /* Cards */
     .card-img-top,
     .card-img-placeholder { height: 160px; }
 }
-
 @media (max-width: 576px) {
     .admin-stat-value { font-size: 1.4rem; }
     .section-title   { font-size: 1.4rem; }

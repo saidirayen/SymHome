@@ -51,16 +51,16 @@
                         <td class="text-end">
                             <a href="{{ path('admin_meuble_show', {'id': meuble.id}) }}"
                                class="btn btn-sm btn-outline-secondary me-1">
-                                <i class="bi bi-eye"></i>
+                                Voir
                             </a>
                             <a href="{{ path('admin_meuble_edit', {'id': meuble.id}) }}"
                                class="btn btn-sm btn-outline-primary me-1">
-                                <i class="bi bi-pencil"></i>
+                                Modifier
                             </a>
                             <form method="post" action="{{ path('admin_meuble_delete', {'id': meuble.id}) }}"
                                   class="d-inline" onsubmit="return confirm('Supprimer ce meuble ?')">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ meuble.id) }}">
-                                <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                <button class="btn btn-sm btn-outline-danger">Supprimer</button>
                             </form>
                         </td>
                     </tr>

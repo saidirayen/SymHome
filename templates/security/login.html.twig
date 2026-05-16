@@ -45,10 +45,6 @@
                     <input type="password" name="password" id="inputPassword"
                            class="form-control form-control-lg" autocomplete="current-password" required>
                 </div>
-                <div class="mb-4 form-check">
-                    <input type="checkbox" name="_remember_me" id="remember" class="form-check-input">
-                    <label for="remember" class="form-check-label">Se souvenir de moi</label>
-                </div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <button type="submit" class="btn btn-primary-custom w-100 btn-lg">Se connecter</button>
             </form>
@@ -57,7 +53,7 @@
 
             <p class="text-center mb-0">
                 Pas encore de compte ?
-                <a href="{{ path('app_register') }}" class="text-accent fw-semibold">S'inscrire gratuitement</a>
+                <a href="{{ path('app_register') }}" class="text-accent fw-semibold">S'inscrire maintenant</a>
             </p>
         </div>
     </div>

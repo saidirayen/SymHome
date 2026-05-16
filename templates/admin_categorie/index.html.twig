@@ -34,12 +34,12 @@
                             </td>                        
                             <td class="text-end">
                             <a href="{{ path('admin_categorie_edit', {'id': categorie.id}) }}" class="btn btn-sm btn-outline-primary me-1">
-                                <i class="bi bi-pencil"></i>
+                                Modifier
                             </a>
                             <form method="post" action="{{ path('admin_categorie_delete', {'id': categorie.id}) }}" class="d-inline"
                                   onsubmit="return confirm('Supprimer cette catégorie ?')">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ categorie.id) }}">
-                                <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                <button class="btn btn-sm btn-outline-danger">Supprimer</button>
                             </form>
                         </td>
                     </tr>

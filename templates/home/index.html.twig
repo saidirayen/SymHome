@@ -50,8 +50,8 @@
                 {% endif %}
                 {% if meuble.stock == 0 %}
                     <span class="stock-badge stock-badge--out">Hors stock</span>
-                {% elseif meuble.stock <= 3 %}
-                    <span class="stock-badge stock-badge--low">Plus que {{ meuble.stock }}</span>
+                {% elseif meuble.stock != 0 %}
+                    <span class="stock-badge stock-badge--low">{{ meuble.stock }} en stock</span>
                 {% endif %}
             </div>
             <div class="card-body d-flex flex-column">

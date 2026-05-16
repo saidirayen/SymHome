@@ -29,7 +29,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_panier') }}">
-                        <i class="bi bi-bag me-1"></i>Panier
+                        <i class="bi bi-bag me-2"></i>Panier
                         {% set panier = app.session.get('panier', []) %}
                         {% if panier|length > 0 %}
                             <span class="badge rounded-pill">{{ panier|length }}</span>
@@ -41,7 +41,7 @@
                 {% if app.user %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_commande_historique') }}">
-                            <i class="bi bi-clock-history me-1"></i>Mes commandes
+                            <i class="bi bi-clock-history me-2"></i>Mes commandes
                         </a>
                     </li>
                     <li class="nav-item dropdown">
