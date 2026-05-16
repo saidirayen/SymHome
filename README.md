@@ -200,7 +200,7 @@ User (1) ──────────────────── (N) Comman
 - Consultation de la vitrine sans connexion (accueil, liste, détail produit)
 - Recherche par nom de meuble et filtrage par catégorie
 - Inscription avec validation du formulaire (nom, prénom, email, téléphone, mot de passe)
-- Connexion / déconnexion avec option "Se souvenir de moi" (7 jours)
+- Connexion / déconnexion
 - Gestion du panier via sessions (ajout, modification des quantités, suppression, calcul du total)
 - Passage de commande avec création en base de données (`Commande` + `LigneCommande`)
 - Diminution automatique du stock après validation de commande
