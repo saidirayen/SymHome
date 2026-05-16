@@ -118,13 +118,14 @@ p { margin-bottom: 0; }
     font-weight: 700;
     min-width: 18px;
     height: 18px;
-    padding: 0 5px;
+    padding: 0 6px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     vertical-align: middle;
     margin-left: 2px;
     border-radius: 50px !important;
+    transform: translateY(-2px);
 }
 
 .dropdown-menu {
