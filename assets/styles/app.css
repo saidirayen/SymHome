@@ -344,7 +344,7 @@ p { margin-bottom: 0; }
 }
 .card-body .fw-bold.text-accent,
 .card-body .fw-bold.mt-auto.text-accent {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
     font-size: 1.2rem;
     font-weight: 700;
     color: var(--accent-dark) !important;
@@ -494,7 +494,7 @@ p { margin-bottom: 0; }
     display: inline-block;
 }
 .show-price {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
     font-size: 2.2rem;
     font-weight: 700;
     color: var(--accent-dark);
@@ -543,7 +543,7 @@ p { margin-bottom: 0; }
     margin-bottom: 1.25rem !important;
 }
 .recap-card .text-accent.fs-5 {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
     font-size: 1.6rem !important;
     color: var(--accent-dark) !important;
     font-weight: 700;
@@ -553,7 +553,7 @@ p { margin-bottom: 0; }
     margin: 1rem 0;
 }
 .sous-total-display {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
     font-size: 1.05rem;
     color: var(--accent-dark);
     min-width: 70px;
@@ -588,7 +588,7 @@ p { margin-bottom: 0; }
     display: inline-block;
 }
 .commande-total {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
     font-size: 1.2rem;
     font-weight: 700;
     color: var(--accent-dark);
