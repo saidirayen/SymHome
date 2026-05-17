@@ -281,7 +281,7 @@ symhome/
 ## Lancer le projet
 
 ```bash
-symfony serve
+symfony server:start
 ```
 
 Accéder à : [http://localhost:8000](http://localhost:8000)
