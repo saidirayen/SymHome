@@ -21,36 +21,36 @@ class AdminMeubleType extends AbstractType
         $builder
             ->add('nom', TextType::class, [
                 'label' => 'Nom du meuble',
-                'attr'  => ['class' => 'form-control', 'placeholder' => 'Ex: Canapé 3 places'],
+                'attr' => ['class' => 'form-control', 'placeholder' => 'Ex: Canapé 3 places'],
             ])
             ->add('slug', TextType::class, [
                 'label' => 'Slug (URL)',
-                'attr'  => ['class' => 'form-control', 'placeholder' => 'canape-3-places'],
+                'attr' => ['class' => 'form-control', 'placeholder' => 'canape-3-places'],
             ])
             ->add('description', TextareaType::class, [
-                'label'    => 'Description',
+                'label' => 'Description',
                 'required' => false,
-                'attr'     => ['class' => 'form-control', 'rows' => 3],
+                'attr' => ['class' => 'form-control', 'rows' => 3],
             ])
             ->add('prix', NumberType::class, [
                 'label' => 'Prix (TND)',
                 'scale' => 2,
-                'attr'  => ['class' => 'form-control', 'placeholder' => '0.00'],
+                'attr' => ['class' => 'form-control', 'placeholder' => '0.00'],
             ])
             ->add('stock', IntegerType::class, [
                 'label' => 'Stock',
-                'attr'  => ['class' => 'form-control', 'placeholder' => '0'],
+                'attr' => ['class' => 'form-control', 'placeholder' => '0'],
             ])
             ->add('image', UrlType::class, [
-                'label'    => 'URL de l\'image',
+                'label' => 'URL de l\'image',
                 'required' => false,
-                'attr'     => ['class' => 'form-control', 'placeholder' => 'https://...'],
+                'attr' => ['class' => 'form-control', 'placeholder' => 'https://...'],
             ])
             ->add('categorie', EntityType::class, [
-                'class'        => Categorie::class,
+                'class' => Categorie::class,
                 'choice_label' => 'libelle',
-                'label'        => 'Catégorie',
-                'attr'         => ['class' => 'form-select'],
+                'label' => 'Catégorie',
+                'attr' => ['class' => 'form-select'],
             ])
         ;
     }

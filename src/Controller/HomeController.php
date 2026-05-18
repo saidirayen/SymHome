@@ -14,7 +14,7 @@ class HomeController extends AbstractController
     public function index(MeubleRepository $meubleRepo, CategorieRepository $categorieRepo): Response
     {
         return $this->render('home/index.html.twig', [
-            'meubles'    => $meubleRepo->findBy([], ['id' => 'DESC'], 8),
+            'meubles' => $meubleRepo->findBy([], ['id' => 'DESC'], 8),
             'categories' => $categorieRepo->findAll(),
         ]);
     }

@@ -17,9 +17,9 @@ class AdminDashboardController extends AbstractController
 {
     #[Route('', name: 'admin_dashboard')]
     public function index(
-        CommandeRepository      $commandeRepo,
-        UserRepository          $userRepo,
-        MeubleRepository        $meubleRepo,
+        CommandeRepository $commandeRepo,
+        UserRepository $userRepo,
+        MeubleRepository $meubleRepo,
         LigneCommandeRepository $ligneRepo
     ): Response {
         $commandes = $commandeRepo->findAll();
@@ -27,8 +27,8 @@ class AdminDashboardController extends AbstractController
         // Chiffre d'affaires total
         $chiffreAffaires = array_sum(array_map(fn($c) => $c->getTotal(), $commandes));
 
-        // Clients seulement (pas les admins)
-        $allUsers  = $userRepo->findAll();
+        // Clients seulement
+        $allUsers = $userRepo->findAll();
         $nbClients = count(array_filter($allUsers, fn($u) => !in_array('ROLE_ADMIN', $u->getRoles())));
 
         // Répartition par statut
@@ -40,14 +40,11 @@ class AdminDashboardController extends AbstractController
             }
         }
 
-        // Chiffre d'affaires par mois (12 derniers mois) — calculé en PHP
+        // Chiffre d'affaires par mois
         $caParMoisRaw = [];
-        $debut = new \DateTime('-12 months');
         foreach ($commandes as $c) {
-            if ($c->getDateCreation() >= $debut) {
-                $mois = $c->getDateCreation()->format('Y-m');
-                $caParMoisRaw[$mois] = ($caParMoisRaw[$mois] ?? 0) + $c->getTotal();
-            }
+            $mois = $c->getDateCreation()->format('Y-m');
+            $caParMoisRaw[$mois] = ($caParMoisRaw[$mois] ?? 0) + $c->getTotal();
         }
         ksort($caParMoisRaw);
         $caParMois = array_map(
@@ -60,13 +57,13 @@ class AdminDashboardController extends AbstractController
         $topMeubles = $ligneRepo->findTopMeubles(5);
 
         return $this->render('dashboard/index.html.twig', [
-            'chiffreAffaires' => $chiffreAffaires,
-            'nbClients'       => $nbClients,
-            'nbCommandes'     => count($commandes),
-            'nbMeubles'       => count($meubleRepo->findAll()),
-            'statutStats'     => $statutStats,
-            'topMeubles'      => $topMeubles,
-            'caParMois'       => $caParMois,
+            'chiffreAffaires' => array_sum($caParMoisRaw),
+            'nbClients' => $nbClients,
+            'nbCommandes' => count($commandes),
+            'nbMeubles' => count($meubleRepo->findAll()),
+            'statutStats' => $statutStats,
+            'topMeubles' => $topMeubles,
+            'caParMois' => $caParMois,
         ]);
     }
 }

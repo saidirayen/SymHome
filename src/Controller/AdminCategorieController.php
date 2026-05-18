@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
-use App\Form\Admin\AdminCategorieType;   // ← namespace corrigé (était App\Form\AdminCategorieType)
+use App\Form\Admin\AdminCategorieType;
 use App\Repository\CategorieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +28,7 @@ class AdminCategorieController extends AbstractController
     public function new(Request $request, EntityManagerInterface $em): Response
     {
         $categorie = new Categorie();
-        $form      = $this->createForm(AdminCategorieType::class, $categorie);
+        $form = $this->createForm(AdminCategorieType::class, $categorie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -40,7 +40,7 @@ class AdminCategorieController extends AbstractController
 
         return $this->render('admin_categorie/new.html.twig', [
             'categorie' => $categorie,
-            'form'      => $form,
+            'form' => $form,
         ]);
     }
 
@@ -58,7 +58,7 @@ class AdminCategorieController extends AbstractController
 
         return $this->render('admin_categorie/edit.html.twig', [
             'categorie' => $categorie,
-            'form'      => $form,
+            'form' => $form,
         ]);
     }
 

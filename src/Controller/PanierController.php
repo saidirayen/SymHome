@@ -19,8 +19,8 @@ class PanierController extends AbstractController
         }
 
         $panier = $request->getSession()->get('panier', []);
-        $items  = [];
-        $total  = 0;
+        $items = [];
+        $total = 0;
 
         foreach ($panier as $id => $quantite) {
             $meuble = $meubleRepo->find($id);
@@ -32,9 +32,9 @@ class PanierController extends AbstractController
                     continue;
                 }
                 $panier[$id] = $quantite;
-                $sousTotal   = $meuble->getPrix() * $quantite;
-                $total      += $sousTotal;
-                $items[]     = [
+                $sousTotal = $meuble->getPrix() * $quantite;
+                $total += $sousTotal;
+                $items[] = [
                     'meuble'    => $meuble,
                     'quantite'  => $quantite,
                     'sousTotal' => $sousTotal,
@@ -62,14 +62,14 @@ class PanierController extends AbstractController
             throw $this->createNotFoundException('Meuble introuvable.');
         }
 
-        // ── Vérification stock ───────────────────────────────────────
+        // Vérification stock
         if ($meuble->getStock() <= 0) {
             $this->addFlash('error', '"' . $meuble->getNom() . '" est hors stock.');
             return $this->redirectToRoute('app_meuble');
         }
 
-        $panier        = $request->getSession()->get('panier', []);
-        $dejaEnPanier  = $panier[$id] ?? 0;
+        $panier = $request->getSession()->get('panier', []);
+        $dejaEnPanier = $panier[$id] ?? 0;
 
         if ($dejaEnPanier >= $meuble->getStock()) {
             $this->addFlash('error', 'Stock insuffisant pour "' . $meuble->getNom() . '" (max : ' . $meuble->getStock() . ').');
@@ -87,12 +87,12 @@ class PanierController extends AbstractController
     public function update(int $id, Request $request, MeubleRepository $meubleRepo): Response
     {
         $quantite = (int) $request->request->get('quantite', 1);
-        $panier   = $request->getSession()->get('panier', []);
+        $panier = $request->getSession()->get('panier', []);
 
         if ($quantite <= 0) {
             unset($panier[$id]);
         } else {
-            // ── Vérification stock ───────────────────────────────────
+            // Vérification stock
             $meuble = $meubleRepo->find($id);
             if ($meuble && $quantite > $meuble->getStock()) {
                 $quantite = $meuble->getStock();

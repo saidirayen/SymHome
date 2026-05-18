@@ -16,16 +16,16 @@ class AdminCategorieType extends AbstractType
         $builder
             ->add('libelle', TextType::class, [
                 'label' => 'Libellé',
-                'attr'  => ['class' => 'form-control', 'placeholder' => 'Ex: Séjour'],
+                'attr' => ['class' => 'form-control', 'placeholder' => 'Ex: Séjour'],
             ])
             ->add('slug', TextType::class, [
                 'label' => 'Slug (URL)',
-                'attr'  => ['class' => 'form-control', 'placeholder' => 'sejour'],
+                'attr' => ['class' => 'form-control', 'placeholder' => 'sejour'],
             ])
             ->add('description', TextareaType::class, [
-                'label'    => 'Description',
+                'label' => 'Description',
                 'required' => false,
-                'attr'     => ['class' => 'form-control', 'rows' => 3],
+                'attr' => ['class' => 'form-control', 'rows' => 3],
             ])
         ;
     }

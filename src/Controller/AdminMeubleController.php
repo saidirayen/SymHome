@@ -28,7 +28,7 @@ class AdminMeubleController extends AbstractController
     public function new(Request $request, EntityManagerInterface $em): Response
     {
         $meuble = new Meuble();
-        $form   = $this->createForm(AdminMeubleType::class, $meuble);
+        $form = $this->createForm(AdminMeubleType::class, $meuble);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -40,7 +40,7 @@ class AdminMeubleController extends AbstractController
 
         return $this->render('admin_meuble/new.html.twig', [
             'meuble' => $meuble,
-            'form'   => $form,
+            'form' => $form,
         ]);
     }
 
@@ -66,7 +66,7 @@ class AdminMeubleController extends AbstractController
 
         return $this->render('admin_meuble/edit.html.twig', [
             'meuble' => $meuble,
-            'form'   => $form,
+            'form' => $form,
         ]);
     }
 
