@@ -14,7 +14,6 @@ class PanierController extends AbstractController
     public function index(Request $request, MeubleRepository $meubleRepo): Response
     {
         if (!$this->getUser()) {
-            $this->addFlash('error', 'Connectez-vous pour accéder au panier.');
             return $this->redirectToRoute('app_login');
         }
 

@@ -97,15 +97,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.querySelectorAll('.quantite-input').forEach(function (input) {
             const prix = parseFloat(input.dataset.prix);
-            const max  = parseInt(input.dataset.max);
-            let qty    = parseInt(input.value) || 1;
+            const max = parseInt(input.dataset.max);
+            let qty = parseInt(input.value) || 1;
 
-            if (qty < 1)   qty = 1;
+            if (qty < 1) qty = 1;
             if (qty > max) qty = max;
             input.value = qty;
 
             const sousTotal = prix * qty;
-            grandTotal     += sousTotal;
+            grandTotal += sousTotal;
 
             const card = input.closest('.card');
             if (card) {
