@@ -39,12 +39,12 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        // Si l'utilisateur essayait d'accéder à une page protégée, l'y renvoyer
+        // si l'utilisateur essayait d'accéder à une page protégée, l'y renvoyer
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
-        // Admin - espace admin
+        // admin vers espace admin
         if (in_array('ROLE_ADMIN', $token->getUser()->getRoles())) {
             return new RedirectResponse($this->urlGenerator->generate('admin_dashboard'));
         }
